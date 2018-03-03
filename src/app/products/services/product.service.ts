@@ -36,16 +36,13 @@ export class ProductService {
     }
 
     getProductData(id: number): Observable<IProduct> {
-        let product: IProduct;
+        return this.getProducts()
+            .map( ( products: Array<IProduct> ) =>  products.find( (p: IProduct ) => p.productId === id ) );
+    }
 
-        if(this.cachedProduct && this.cachedProduct.length > 0){
-            return Observable.of(this.cachedProduct.find( (p: IProduct ) => p.productId === id));
-        }
-        else {
-            return this.getProducts()
-                .map( ( products: Array<IProduct> ) =>  products.find( (p: IProduct ) => p.productId === id ) );
-        }
-
+    getProductsId(): Observable<number[]> {
+        return this.getProducts()
+            .map( ( products: Array<IProduct> ) =>  products.map( (p: IProduct ) => p.productId ) );
     }
 
     private handleError(err: HttpErrorResponse) {
