@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 
-import { IProduct } from './product.interface'
-import { ProductService } from "./services/product.service";
+import { IProduct } from '../models/product.interface'
+import { ProductService } from "../services/product.service";
 
 @Component({
     selector: 'am-products',
