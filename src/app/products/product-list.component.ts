@@ -4,7 +4,8 @@ import { IProduct } from './product.interface'
 
 @Component({
     selector: 'am-products',
-    templateUrl: './product-list.component.html'
+    templateUrl: './product-list.component.html',
+    styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent {
     pageTitle: string = 'Product List';
@@ -54,10 +55,16 @@ export class ProductListComponent {
         this.showImage = !this.showImage;
     }
 
+    onRatingClicked($event: string): void {
+        this.pageTitle = `Product list ${$event}`;
+    }
+
     private filterProducts() : IProduct[] {
         let filterBy = this.filterText.toLocaleLowerCase();
         return this.products.filter( (product: IProduct) => {
             return product.productName.toLocaleLowerCase().indexOf(filterBy) !== -1;
         })
     }
+
+
 }
