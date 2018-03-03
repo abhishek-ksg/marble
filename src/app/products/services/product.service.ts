@@ -6,7 +6,6 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 
 import { IProduct } from "../product.interface";
-import { error } from "selenium-webdriver";
 
 
 @Injectable()
@@ -25,7 +24,6 @@ export class ProductService {
     }
 
     private handleError(err: HttpErrorResponse) {
-        console.error(err.message);
         return Observable.throw(err.message);
     }
 }
