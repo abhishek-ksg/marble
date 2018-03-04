@@ -11,12 +11,10 @@ export class ProductDetailGuardService implements CanActivate{
     //ngOnIt is only for components & directives not Injectables
 
     constructor(private productService: ProductService, private router: Router){
-        // this.productService.getProductsId()
-        //     .subscribe( (ids: number[]) => {
-        //         this.ids = ids
-        //     });
+
     }
 
+    //Perfect way to handle a reques from canActivate
     canActivate(route: ActivatedRouteSnapshot): Observable<boolean>{
         let allowed: boolean = false;
 

@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http'
 import { RouterModule } from '@angular/router'
 
+import { AppRouteModule } from './app-route.module';
 import { AppComponent } from './app.component';
 import { ProdusctsModule } from './products/products.module';
 import { WelcomeComponent } from './welcome/welcome.component';
@@ -19,11 +20,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
     FormsModule,
     HttpClientModule,
     ProdusctsModule,
-    RouterModule.forRoot([
-      {path: 'welcome', component: WelcomeComponent},
-      {path: '', redirectTo: 'welcome', pathMatch: 'full'},
-      {path: '**', redirectTo: 'welcome', pathMatch: 'full'}
-    ])
+    AppRouteModule
   ],
   providers: [],
   bootstrap: [AppComponent]
