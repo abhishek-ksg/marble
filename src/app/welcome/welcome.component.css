@@ -1,0 +1,18 @@
+.welcomeMsg {
+    text-align: center;
+}
+
+.welcomeImgRow {
+    text-align: center;
+}
+
+.welcomeImg {
+    max-width: 500px;
+    max-height: 200px;
+}
+
+.contact-icon {
+    max-width: 50px;
+    max-height: 50px;
+    margin: 10px;
+}

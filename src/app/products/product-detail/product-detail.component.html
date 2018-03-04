@@ -1,0 +1,45 @@
+<div class="panel panel-primary">
+    <div class="panel-heading" *ngIf="product">
+        <button type="button" class="btn btn-primary" (click)="onBack()"><span class="glyphicon glyphicon-chevron-left"></span> Back</button> {{product.productName}}
+    </div>
+
+    <div class="panel-body" *ngIf="product">
+        <div class="row">
+            <div class="col-sm-6">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td>Name: </td>
+                            <td>{{product.productName}}</td>
+                        </tr>
+                        <tr>
+                            <td>Code: </td>
+                            <td>{{product.productCode}}</td>
+                        </tr>
+                        <tr>
+                            <td>Description: </td>
+                            <td>{{product.description}}</td>
+                        </tr>
+                        <tr>
+                            <td>Price: </td>
+                            <td>{{product.price | currency:'USD':true:'1.2-2'}}</td>
+                        </tr>
+                        <tr>
+                            <td>Rating: </td>
+                            <td><am-star [currentRating]='product.starRating'></am-star></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-sm-6">
+                <img [src]="product.imageUrl" [title]="product.productName" class='productImage'>
+            </div>
+        </div>
+    </div>
+    <div class="panel-footer">
+        <div class="btn-group">
+            <button type="button" class="btn btn-primary" (click)="nextPrevProduct(false)" [disabled]="disablePrev"><span class="glyphicon glyphicon-chevron-left"></span> Prev</button>
+            <button type="button" class="btn btn-primary" (click)="nextPrevProduct(true)" [disabled]="disableNext">Next <span class="glyphicon glyphicon-chevron-right"></span></button>
+          </div>
+    </div>
+</div>
