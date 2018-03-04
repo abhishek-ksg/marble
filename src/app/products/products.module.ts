@@ -6,6 +6,7 @@ import { ProductListComponent } from "./products-list/product-list.component";
 import { SharedModule } from "../shared/shared.module";
 import { RouterModule } from "@angular/router";
 import { ProductDetailComponent } from "./product-detail/product-detail.component";
+import { ProductDetailGuardService } from "./services/product-detail-guard.service";
 
 @NgModule({
     imports: [
@@ -13,7 +14,7 @@ import { ProductDetailComponent } from "./product-detail/product-detail.componen
         SharedModule,
         RouterModule.forChild([
             {path: 'products', component: ProductListComponent},
-            {path: 'products/:id', component: ProductDetailComponent}
+            {path: 'products/:id', canActivate: [ProductDetailGuardService], component: ProductDetailComponent}
         ])
     ],
     declarations: [
@@ -21,7 +22,8 @@ import { ProductDetailComponent } from "./product-detail/product-detail.componen
         ProductDetailComponent
     ],
     providers: [
-        ProductService
+        ProductService,
+        ProductDetailGuardService
 
     ]
 
