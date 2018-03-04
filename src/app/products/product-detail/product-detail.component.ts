@@ -44,7 +44,6 @@ export class ProductDetailComponent implements OnInit{
 
     nextPrevProduct(next: boolean = true): void {
         this.productId = this.getNextPrevProductId(next);
-
         this._router.navigate(['products', this.productId]);
     }
 
