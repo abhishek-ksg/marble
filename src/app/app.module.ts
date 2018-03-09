@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router'
 import { AppRouteModule } from './app-route.module';
 import { AppComponent } from './app.component';
 import { ProdusctsModule } from './products/products.module';
+import { EmployeeFormModule } from './employeeForm/employee-form.module';
 import { WelcomeComponent } from './welcome/welcome.component';
 
 
@@ -20,6 +21,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
     FormsModule,
     HttpClientModule,
     ProdusctsModule,
+    EmployeeFormModule,
     AppRouteModule
   ],
   providers: [],

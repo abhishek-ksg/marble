@@ -1,0 +1,41 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        Employee Form
+    </div>
+    <div class="panel-body">
+        <form #empForm='ngForm' novalidate>
+            <div class="form-group">
+                <label for="firstName" class="control-label">First Name</label>
+                <input type="text" class="form-control" id="firstName" #firstName='ngModel' name="firstName" [(ngModel)]="emp.firstName">
+            </div>
+            <div class="form-group">
+                <label for="lastName" class="control-label">Last Name</label>
+                <input type="text" class="form-control" id="lastName" #lastName='ngModel' name="lastName" [(ngModel)]="emp.lastName">
+            </div>
+            <div class="form-group">
+                <label class="form-check-label" for="isfte">
+                <input type="checkbox" class="form-check-input" id="isfte" #isfte='ngModel' name="isfte" [(ngModel)]="emp.isFTE"> Full Time Employee
+                </label>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Pay Type</label>
+                <div class="radio">
+                    <label><input type="radio" name="payType" value="usd" #paytype='ngModel' [(ngModel)]="emp.paytype">USD</label>
+                </div>
+                <div class="radio">
+                    <label><input type="radio" name="payType" value="inr" #paytype='ngModel' [(ngModel)]="emp.paytype">INR</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="language" class="control-label">Language</label>
+                <select class="form-control" name="language" #language="ngModel" [(ngModel)]="emp.language">
+                        <option>Default</option>
+                        <option *ngFor='let lang of languages'>{{lang}}</option>
+                </select>
+
+            </div>
+        </form>
+        {{language.value}}
+    </div>
+</div>
+
