@@ -4,13 +4,21 @@
     </div>
     <div class="panel-body">
         <form #empForm='ngForm' novalidate>
-            <div class="form-group">
+            <div class="form-group" [class.has-error]="firstName.touched && firstName.invalid">
                 <label for="firstName" class="control-label">First Name</label>
-                <input type="text" class="form-control" id="firstName" #firstName='ngModel' name="firstName" [(ngModel)]="emp.firstName">
+                <input type="text" class="form-control" id="firstName" #firstName='ngModel'
+                    name="firstName" [(ngModel)]="emp.firstName" required pattern=".{3,}">
+                <div class="alert alert-danger" *ngIf="firstName.touched && firstName.invalid">
+                    Minimum 3 characters required.
+                </div>
             </div>
-            <div class="form-group">
+            <div class="form-group" [class.has-error]="lastName.touched && lastName.invalid">
                 <label for="lastName" class="control-label">Last Name</label>
-                <input type="text" class="form-control" id="lastName" #lastName='ngModel' name="lastName" [(ngModel)]="emp.lastName">
+                <input type="text" class="form-control" id="lastName" #lastName='ngModel'
+                    name="lastName" [(ngModel)]="emp.lastName" required pattern=".{3,}">
+                <div class="alert alert-danger" *ngIf="lastName.touched && lastName.invalid">
+                    Minimum 3 characters required.
+                </div>
             </div>
             <div class="form-group">
                 <label class="form-check-label" for="isfte">
@@ -26,16 +34,17 @@
                     <label><input type="radio" name="payType" value="inr" #paytype='ngModel' [(ngModel)]="emp.paytype">INR</label>
                 </div>
             </div>
-            <div class="form-group">
+            <div class="form-group" [class.has-error]="invalidLanguage">
                 <label for="language" class="control-label">Language</label>
-                <select class="form-control" name="language" #language="ngModel" [(ngModel)]="emp.language">
+                <select class="form-control" name="language" #language="ngModel"
+                    [(ngModel)]="emp.language" (blur)="checkforvalidation()" (change)="checkforvalidation()">
                         <option>Default</option>
                         <option *ngFor='let lang of languages'>{{lang}}</option>
                 </select>
-
+                <div class="alert alert-danger" *ngIf="invalidLanguage">
+                    Please select a valid language.
+                </div>
             </div>
         </form>
-        {{language.value}}
     </div>
 </div>
-

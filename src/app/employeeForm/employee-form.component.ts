@@ -6,7 +6,13 @@ import { Component } from '@angular/core';
 })
 export class EmployeeFormComponent {
 
+    invalidLanguage: boolean = false;
+
     languages: Array<string> = ["JavaScript", "Python", "Java"];
 
     emp: EmployeeModel = new EmployeeModel("abhishek", "jain", true, 'usd', "Default");
+
+    checkforvalidation() {
+        this.invalidLanguage = this.emp.language.toLocaleLowerCase() === "default"
+    }
 }
