@@ -3,7 +3,7 @@
         {{pageTitle}}
     </div>
 
-    <div class="panel-body">
+    <div class="panel-body" *ngIf='products && products.length'>
         <div class="row">
             <div class="col-sm-2">
                 Filter:
@@ -45,5 +45,10 @@
                 </tbody>
               </table>
         </div>
+    </div>
+
+    <div class="panel-body" *ngIf='!products || !products.length'>
+
+        <mat-spinner style="margin:0 auto;" *ngIf="!languages || languages.length == 0"></mat-spinner>
     </div>
 </div>

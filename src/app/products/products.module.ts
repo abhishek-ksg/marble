@@ -1,6 +1,7 @@
 import { NgModule } from "@angular/core";
 import { HttpClientModule } from "@angular/common/http";
 
+import { AngularMaterilModule } from './../angularmaterial/angularmaterial.module';
 import { ProductService } from "./services/product.service";
 import { ProductListComponent } from "./products-list/product-list.component";
 import { SharedModule } from "../shared/shared.module";
@@ -12,6 +13,7 @@ import { ProductDetailGuardService } from "./services/product-detail-guard.servi
     imports: [
         HttpClientModule,
         SharedModule,
+        AngularMaterilModule,
         RouterModule.forChild([
             {path: 'products', component: ProductListComponent},
             {path: 'products/:id', canActivate: [ProductDetailGuardService], component: ProductDetailComponent}

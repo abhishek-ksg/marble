@@ -3,7 +3,7 @@
         Employee Form
     </div>
     <div class="panel-body">
-        <form #empForm='ngForm' novalidate>
+        <form #empForm='ngForm' novalidate (submit)="submitForm(empForm)" *ngIf="languages && languages.length > 0">
             <div class="form-group" [class.has-error]="firstName.touched && firstName.invalid">
                 <label for="firstName" class="control-label">First Name</label>
                 <input type="text" class="form-control" id="firstName" #firstName='ngModel'
@@ -45,6 +45,14 @@
                     Please select a valid language.
                 </div>
             </div>
+
+            <button class="btn btn-primary" type="submit"
+            [disabled]="empForm.invalid">Ok</button>
         </form>
+
+        <mat-spinner style="margin:0 auto;" *ngIf="!languages || languages.length == 0"></mat-spinner>
     </div>
+
+
+
 </div>
