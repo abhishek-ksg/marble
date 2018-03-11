@@ -27,7 +27,7 @@ export class ProductService {
             return Observable.of(this.cachedProduct);
         } else {
             return this._http.get<IProduct[]>(this.productsUrl)
-            .delay(4000)
+            .delay(1000)
             .do( (products) => {
                 console.log(JSON.stringify(products));
                 this.cachedProduct = products;

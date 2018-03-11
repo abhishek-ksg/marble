@@ -27,7 +27,7 @@ export class EmployeeFormService {
 
     getLanguages(): Observable<any> {
         return this.http.get('http://localhost:3100/getlanguages')
-                        .delay(5000)
+                        .delay(1000)
                         .map(this.extractLanguages)
                         .catch(this.handleError);
     }
