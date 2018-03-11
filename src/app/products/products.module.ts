@@ -1,13 +1,13 @@
-import { NgModule } from "@angular/core";
-import { HttpClientModule } from "@angular/common/http";
+import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AngularMaterilModule } from './../angularmaterial/angularmaterial.module';
-import { ProductService } from "./services/product.service";
-import { ProductListComponent } from "./products-list/product-list.component";
-import { SharedModule } from "../shared/shared.module";
-import { RouterModule } from "@angular/router";
-import { ProductDetailComponent } from "./product-detail/product-detail.component";
-import { ProductDetailGuardService } from "./services/product-detail-guard.service";
+import { ProductService } from './services/product.service';
+import { ProductListComponent } from './products-list/product-list.component';
+import { SharedModule } from '../shared/shared.module';
+import { RouterModule } from '@angular/router';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { ProductDetailGuardService } from './services/product-detail-guard.service';
 
 @NgModule({
     imports: [
