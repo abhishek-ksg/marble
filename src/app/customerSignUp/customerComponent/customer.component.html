@@ -9,7 +9,10 @@
                   [formGroup]="signUpForm"
                   (submit)="submitSignUpForm()">
                 <fieldset>
-                    <div class="form-group">
+                    <div class="form-group"
+                        [class.has-error]="(signUpForm.get('firstName').touched ||
+                        signUpForm.get('firstName').dirty) &&
+                        !signUpForm.get('firstName').valid">
                         <label for="firstNameId"
                                class="col-md-2 control-label">
                             First Name
@@ -19,9 +22,20 @@
                                    class="form-control"
                                    id="firstNameId"
                                    formControlName="firstName"/>
+                            <span class="help-block" *ngIf="(signUpForm.get('firstName').touched || signUpForm.get('firstName').dirty) && signUpForm.get('firstName').errors">
+                                <span *ngIf="signUpForm.get('firstName').errors.required">
+                                    Please enter your first name.
+                                </span>
+                                    <span *ngIf="signUpForm.controls.firstName.errors.minlength">
+                                    Minimum 3 characters required
+                                </span>
+                            </span>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group"
+                         [class.has-error]="(signUpForm.get('lastName').touched ||
+                         signUpForm.get('lastName').dirty) &&
+                         !signUpForm.get('lastName').valid">
                         <label for="lastNameId"
                                class="col-md-2 control-label">
                             Last Name
@@ -31,6 +45,14 @@
                                    class="form-control"
                                    id="lastNameId"
                                    formControlName="lastName"/>
+                            <span class="help-block" *ngIf="(signUpForm.get('lastName').touched || signUpForm.get('lastName').dirty) && signUpForm.get('lastName').errors">
+                                <span *ngIf="signUpForm.get('lastName').errors.required">
+                                    Please enter your last name.
+                                </span>
+                                    <span *ngIf="signUpForm.controls.lastName.errors.minlength">
+                                    Minimum 3 characters required
+                                </span>
+                            </span>
                         </div>
                     </div>
                     <div class="form-group">
@@ -82,7 +104,10 @@
                             </label>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group"
+                         [class.has-error]="(signUpForm.get('rating').touched ||
+                         signUpForm.get('rating').dirty) &&
+                         !signUpForm.get('rating').valid">
                         <label for="ratingId"
                                class="col-md-2 control-label">
                             Rating
@@ -92,6 +117,12 @@
                                    class="form-control"
                                    id="ratingId"
                                    formControlName="rating"/>
+                            <span class="help-block" *ngIf="(signUpForm.get('rating').touched || signUpForm.get('rating').dirty) && signUpForm.get('rating').errors">
+                                <span *ngIf="signUpForm.get('rating').errors.required">
+                                    Please enter rating.
+                                </span>
+
+                            </span>
                         </div>
                     </div>
                     <div class="form-group">
