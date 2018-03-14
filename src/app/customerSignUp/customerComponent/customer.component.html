@@ -99,13 +99,29 @@
                             <label>
                                 <input id="sendCatalogId"
                                        type="checkbox"
-                                       formControlName="sendCataog" >
+                                       formControlName="sendCatalog" >
                                        Send me your catalog
                             </label>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <div class="col-md-4 col-md-offset-2">
+                            <span>
+                                <button class="btn btn-primary"
+                                        type="submit"
+                                        [disabled]="!signUpForm.valid">Ok
+                                </button>
+                            </span>
+                            <span>
+                                <button class="btn btn-default"
+                                        type="button"
+                                        (click)="fetchDefault()">
+                                    Fetch Default
+                                </button>
+                            </span>
+                        </div>
+                    </div>
                 </fieldset>
-
             </form>
         </div>
     </div>
