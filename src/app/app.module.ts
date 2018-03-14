@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { ProdusctsModule } from './products/products.module';
 import { EmployeeFormModule } from './employeeForm/employee-form.module';
 import { WelcomeComponent } from './welcome/welcome.component';
+import { CustomerModule } from './customerSignUp/customer.module';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
     HttpClientModule,
     ProdusctsModule,
     EmployeeFormModule,
+    CustomerModule,
     AppRouteModule
   ],
   providers: [],
