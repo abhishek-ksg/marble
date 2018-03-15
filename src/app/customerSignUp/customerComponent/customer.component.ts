@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { Customer } from '../model/customer';
 import { AppConstants } from '../../app.constants';
+import { CustomValidators } from '../../shared/validators/custom.validators';
 
 @Component({
     templateUrl: './customer.component.html',
@@ -23,7 +24,7 @@ export class CustomerComponent implements OnInit {
             confirmMail: ['', [Validators.required, Validators.pattern(AppConstants.EMAIL_PATTERN)]],
             phone: '',
             notificationType: 'email',
-            rating: ['', Validators.required],
+            rating: ['', [ Validators.required, CustomValidators.customRangeValidator(1, 10) ] ],
             sendCatalog: false
         });
 
@@ -50,11 +51,12 @@ export class CustomerComponent implements OnInit {
 
     private notificationTypeChanged(value: string) {
         if (value === 'phone') {
-            this.signUpForm.get('phone').setValidators(Validators.required);
+            this.signUpForm.get('phone').setValidators( [Validators.required, CustomValidators.phoneNumberValidator] );
             this.signUpForm.get('email').clearValidators();
 
         } else if (value === 'email') {
-            this.signUpForm.get('email').setValidators([Validators.required, Validators.pattern(AppConstants.EMAIL_PATTERN) ]);
+            this.signUpForm.get('email').setValidators([Validators.required,
+                Validators.pattern(AppConstants.EMAIL_PATTERN) ]);
             this.signUpForm.get('phone').clearValidators();
         }
         this.signUpForm.get('phone').updateValueAndValidity();

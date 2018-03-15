@@ -107,6 +107,9 @@
                                 <span *ngIf="signUpForm.get('phone').errors.required">
                                     Please enter your phone number.
                                 </span>
+                                <span *ngIf="!signUpForm.get('phone').errors.required && signUpForm.get('phone').errors.invalidMobile">
+                                    Please enter a valid mobile number.
+                                </span>
 
                             </span>
                         </div>
@@ -141,7 +144,15 @@
                                 <span *ngIf="signUpForm.get('rating').errors.required">
                                     Please enter rating.
                                 </span>
-
+                                <span *ngIf="signUpForm.get('rating').value && signUpForm.get('rating').errors.notANumber">
+                                    Please enter number only.
+                                </span>
+                                <span *ngIf="signUpForm.get('rating').value && signUpForm.get('rating').errors.lowOnRange">
+                                    Please enter rating >= 1.
+                                </span>
+                                <span *ngIf="signUpForm.get('rating').value && signUpForm.get('rating').errors.outOfRange">
+                                    Please enter rating <= 10.
+                                </span>
                             </span>
                         </div>
                     </div>
