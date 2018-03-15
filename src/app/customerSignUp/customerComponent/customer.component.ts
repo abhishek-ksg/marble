@@ -20,8 +20,10 @@ export class CustomerComponent implements OnInit {
         this.signUpForm = this.fb.group({
             firstName: ['', [Validators.required, Validators.minLength(3)]],
             lastName: ['', [Validators.required, Validators.minLength(3)]],
-            email: ['', [Validators.required, Validators.pattern(AppConstants.EMAIL_PATTERN)]],
-            confirmMail: ['', [Validators.required, Validators.pattern(AppConstants.EMAIL_PATTERN)]],
+            emailGroup: this.fb.group({
+                email: ['', [Validators.required, Validators.pattern(AppConstants.EMAIL_PATTERN)]],
+                confirmEmail: ['', [Validators.required, Validators.pattern(AppConstants.EMAIL_PATTERN)]],
+            }, {validator: CustomValidators.emailMatcher}),
             phone: '',
             notificationType: 'email',
             rating: ['', [ Validators.required, CustomValidators.customRangeValidator(1, 10) ] ],
@@ -52,15 +54,15 @@ export class CustomerComponent implements OnInit {
     private notificationTypeChanged(value: string) {
         if (value === 'phone') {
             this.signUpForm.get('phone').setValidators( [Validators.required, CustomValidators.phoneNumberValidator] );
-            this.signUpForm.get('email').clearValidators();
+            this.signUpForm.get('emailGroup.email').clearValidators();
 
         } else if (value === 'email') {
-            this.signUpForm.get('email').setValidators([Validators.required,
+            this.signUpForm.get('emailGroup.email').setValidators([Validators.required,
                 Validators.pattern(AppConstants.EMAIL_PATTERN) ]);
             this.signUpForm.get('phone').clearValidators();
         }
         this.signUpForm.get('phone').updateValueAndValidity();
-        this.signUpForm.get('email').updateValueAndValidity();
+        this.signUpForm.get('emailGroup.email').updateValueAndValidity();
     }
 }
 

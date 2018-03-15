@@ -25,4 +25,17 @@ export class CustomValidators {
             return {'invalidMobile': true};
         }
     }
+
+    public static emailMatcher(c: AbstractControl): {[ket: string]: boolean} | null {
+        const email = c.get('email');
+        const confirmEmail = c.get('confirmEmail');
+
+        if (email.pristine || confirmEmail.pristine || email.invalid || confirmEmail.invalid) {
+            return null;
+        }
+        if (email.value === confirmEmail.value) {
+            return null;
+        }
+        return { 'misMatch': true };
+    }
 }

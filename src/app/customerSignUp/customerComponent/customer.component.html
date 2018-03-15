@@ -55,41 +55,59 @@
                             </span>
                         </div>
                     </div>
-                    <div class="form-group"
-                        [class.has-error]="(signUpForm.get('email').touched ||
-                        signUpForm.get('email').dirty) &&
-                        !signUpForm.get('email').valid">
-                        <label for="emailId"
-                               class="col-md-2 control-label">
-                            Email
-                        </label>
-                        <div class="col-md-8">
-                            <input type="text"
-                                   class="form-control"
-                                   id="emailId"
-                                   formControlName="email"/>
-                            <span class="help-block" *ngIf="(signUpForm.get('email').touched || signUpForm.get('email').dirty) && signUpForm.get('email').errors">
-                                <span *ngIf="signUpForm.get('email').errors.required">
-                                    Please enter your email Id.
+                    <div formGroupName="emailGroup"
+                         [class.has-error]="signUpForm.get('emailGroup').errors">
+                        <div class="form-group"
+                             [class.has-error]="(signUpForm.get('emailGroup.email').touched ||
+                             signUpForm.get('emailGroup.email').dirty) &&
+                             !signUpForm.get('emailGroup.email').valid">
+                            <label for="emailId"
+                                class="col-md-2 control-label">
+                                Email
+                            </label>
+                            <div class="col-md-8">
+                                <input type="text"
+                                    class="form-control"
+                                    id="emailId"
+                                    formControlName="email"/>
+                                <span class="help-block" *ngIf="(signUpForm.get('emailGroup.email').touched || signUpForm.get('emailGroup.email').dirty) && signUpForm.get('emailGroup.email').errors">
+                                    <span *ngIf="signUpForm.get('emailGroup.email').errors.required">
+                                        Please enter your email Id.
+                                    </span>
+                                    <span *ngIf="signUpForm.get('emailGroup.email').errors.pattern">
+                                        Invalid email Id
+                                    </span>
                                 </span>
-                                <span *ngIf="signUpForm.get('email').errors.pattern">
-                                    Invalid email Id
+                            </div>
+                        </div>
+                        <div class="form-group"
+                            [class.has-error]="(signUpForm.get('emailGroup.confirmEmail').touched ||
+                            signUpForm.get('emailGroup.confirmEmail').dirty) &&
+                            !signUpForm.get('emailGroup.confirmEmail').valid">
+                            <label for="confirmMailId"
+                                class="col-md-2 control-label">
+                                Confirm Mail
+                            </label>
+                            <div class="col-md-8">
+                                <input type="text"
+                                    class="form-control"
+                                    id="confirmMailId"
+                                    formControlName="confirmEmail"/>
+                                <span class="help-block" *ngIf="(signUpForm.get('emailGroup.confirmEmail').touched || signUpForm.get('emailGroup.confirmEmail').dirty) && ( signUpForm.get('emailGroup.confirmEmail').errors || signUpForm.get('emailGroup').errors )">
+                                    <span *ngIf="signUpForm.get('emailGroup.confirmEmail').errors?.required">
+                                        Please enter your confirmation mail.
+                                    </span>
+                                    <span *ngIf="signUpForm.get('emailGroup.confirmEmail').errors?.pattern">
+                                        Invalid email Id
+                                    </span>
+                                    <span *ngIf="!signUpForm.get('emailGroup.confirmEmail').errors && signUpForm.get('emailGroup').errors?.misMatch">
+                                        Confirmation email not matching email.
+                                    </span>
                                 </span>
-                            </span>
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="confirmMailId"
-                               class="col-md-2 control-label">
-                            Confirm Mail
-                        </label>
-                        <div class="col-md-8">
-                            <input type="text"
-                                   class="form-control"
-                                   id="confirmMailId"
-                                   formControlName="confirmMail"/>
-                        </div>
-                    </div>
+
                     <div class="form-group"
                         [class.has-error]="(signUpForm.get('phone').touched ||
                         signUpForm.get('phone').dirty) &&
