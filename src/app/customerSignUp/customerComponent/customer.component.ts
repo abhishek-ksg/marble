@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 
 import { Customer } from '../model/customer';
 import { AppConstants } from '../../app.constants';
@@ -44,7 +44,8 @@ export class CustomerComponent implements OnInit {
             phone: '',
             notificationType: 'email',
             rating: ['', [ Validators.required, this.validationService.customRangeValidator(1, 10) ] ],
-            sendCatalog: false
+            sendCatalog: false,
+            addresses: this.fb.array([this.getAddressBlock()])
         });
 
         const notificationType = this.signUpForm.get('notificationType');
@@ -70,6 +71,10 @@ export class CustomerComponent implements OnInit {
 
     }
 
+    get addresses(): FormArray {
+        return <FormArray>this.signUpForm.get('addresses');
+    }
+
     fetchDefault() {
         this.signUpForm.setValue({
             firstName: 'Abhishek',
@@ -81,12 +86,17 @@ export class CustomerComponent implements OnInit {
             phone: '9957608288',
             notificationType: 'email',
             rating: 3.5,
-            sendCatalog: true
+            sendCatalog: true,
+            addresses: this.setDefaultAddress()
         });
     }
 
     submitSignUpForm() {
         alert('Dude!!');
+    }
+
+    addAddress() {
+        this.addresses.push(this.getAddressBlock());
     }
 
     private notificationTypeChanged(value: string) {
@@ -132,6 +142,32 @@ export class CustomerComponent implements OnInit {
 
     private setRatingErrMsg() {
         this.ratingErrorMsg = this.validationService.setRatingErrMsg(this.rating);
+    }
+
+    private getAddressBlock() {
+        return this.fb.group({
+            addressType: 'home',
+            street1: ['', Validators.required],
+            street2: '',
+            city: '',
+            state: '',
+            zip: ''
+        });
+    }
+
+    private setDefaultAddress(): Array<any> {
+        const defaultAddress = [];
+        for (let i = 0; i < this.addresses.length; i++) {
+            defaultAddress.push({
+                addressType: 'office',
+                street1: 'Ganpati Nawas',
+                street2: 'Bangur Nagar',
+                city: 'Mumbai',
+                state: 'MAH',
+                zip: '305801'
+            });
+        }
+        return defaultAddress;
     }
 }
 
