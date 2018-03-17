@@ -10,9 +10,7 @@
                   (submit)="submitSignUpForm()">
                 <fieldset>
                     <div class="form-group"
-                        [class.has-error]="(signUpForm.get('firstName').touched ||
-                        signUpForm.get('firstName').dirty) &&
-                        !signUpForm.get('firstName').valid">
+                        [class.has-error]="firstNameErrorMsg">
                         <label for="firstNameId"
                                class="col-md-2 control-label">
                             First Name
@@ -22,20 +20,13 @@
                                    class="form-control"
                                    id="firstNameId"
                                    formControlName="firstName"/>
-                            <span class="help-block" *ngIf="(signUpForm.get('firstName').touched || signUpForm.get('firstName').dirty) && signUpForm.get('firstName').errors">
-                                <span *ngIf="signUpForm.get('firstName').errors.required">
-                                    Please enter your first name.
-                                </span>
-                                    <span *ngIf="signUpForm.get('firstName').errors.minlength">
-                                    Minimum 3 characters required
-                                </span>
+                            <span class="help-block" *ngIf="firstNameErrorMsg">
+                                {{firstNameErrorMsg}}
                             </span>
                         </div>
                     </div>
                     <div class="form-group"
-                         [class.has-error]="(signUpForm.get('lastName').touched ||
-                         signUpForm.get('lastName').dirty) &&
-                         !signUpForm.get('lastName').valid">
+                         [class.has-error]="lastNameErrorMsg">
                         <label for="lastNameId"
                                class="col-md-2 control-label">
                             Last Name
@@ -45,22 +36,15 @@
                                    class="form-control"
                                    id="lastNameId"
                                    formControlName="lastName"/>
-                            <span class="help-block" *ngIf="(signUpForm.get('lastName').touched || signUpForm.get('lastName').dirty) && signUpForm.get('lastName').errors">
-                                <span *ngIf="signUpForm.get('lastName').errors.required">
-                                    Please enter your last name.
-                                </span>
-                                    <span *ngIf="signUpForm.get('lastName').errors.minlength">
-                                    Minimum 3 characters required
-                                </span>
+                            <span class="help-block" *ngIf="lastNameErrorMsg">
+                                {{lastNameErrorMsg}}
                             </span>
                         </div>
                     </div>
                     <div formGroupName="emailGroup"
                          [class.has-error]="signUpForm.get('emailGroup').errors">
                         <div class="form-group"
-                             [class.has-error]="(signUpForm.get('emailGroup.email').touched ||
-                             signUpForm.get('emailGroup.email').dirty) &&
-                             !signUpForm.get('emailGroup.email').valid">
+                             [class.has-error]="emailErrorMsg">
                             <label for="emailId"
                                 class="col-md-2 control-label">
                                 Email
@@ -70,20 +54,13 @@
                                     class="form-control"
                                     id="emailId"
                                     formControlName="email"/>
-                                <span class="help-block" *ngIf="(signUpForm.get('emailGroup.email').touched || signUpForm.get('emailGroup.email').dirty) && signUpForm.get('emailGroup.email').errors">
-                                    <span *ngIf="signUpForm.get('emailGroup.email').errors.required">
-                                        Please enter your email Id.
-                                    </span>
-                                    <span *ngIf="signUpForm.get('emailGroup.email').errors.pattern">
-                                        Invalid email Id
-                                    </span>
+                                <span class="help-block" *ngIf="emailErrorMsg">
+                                    {{emailErrorMsg}}
                                 </span>
                             </div>
                         </div>
                         <div class="form-group"
-                            [class.has-error]="(signUpForm.get('emailGroup.confirmEmail').touched ||
-                            signUpForm.get('emailGroup.confirmEmail').dirty) &&
-                            !signUpForm.get('emailGroup.confirmEmail').valid">
+                            [class.has-error]="confirmEmailErrorMsg">
                             <label for="confirmMailId"
                                 class="col-md-2 control-label">
                                 Confirm Mail
@@ -93,14 +70,9 @@
                                     class="form-control"
                                     id="confirmMailId"
                                     formControlName="confirmEmail"/>
-                                <span class="help-block" *ngIf="(signUpForm.get('emailGroup.confirmEmail').touched || signUpForm.get('emailGroup.confirmEmail').dirty) && ( signUpForm.get('emailGroup.confirmEmail').errors || signUpForm.get('emailGroup').errors )">
-                                    <span *ngIf="signUpForm.get('emailGroup.confirmEmail').errors?.required">
-                                        Please enter your confirmation mail.
-                                    </span>
-                                    <span *ngIf="signUpForm.get('emailGroup.confirmEmail').errors?.pattern">
-                                        Invalid email Id
-                                    </span>
-                                    <span *ngIf="!signUpForm.get('emailGroup.confirmEmail').errors && signUpForm.get('emailGroup').errors?.misMatch">
+                                <span class="help-block" *ngIf="( confirmEmailErrorMsg || signUpForm.get('emailGroup').errors )">
+                                    {{confirmEmailErrorMsg}}
+                                    <span *ngIf="!confirmEmailErrorMsg && signUpForm.get('emailGroup').errors?.misMatch">
                                         Confirmation email not matching email.
                                     </span>
                                 </span>
@@ -109,9 +81,7 @@
                     </div>
 
                     <div class="form-group"
-                        [class.has-error]="(signUpForm.get('phone').touched ||
-                        signUpForm.get('phone').dirty) &&
-                        !signUpForm.get('phone').valid">
+                        [class.has-error]="phoneErrorMsg">
                         <label for="phoneId"
                                class="col-md-2 control-label">
                             Phone
@@ -121,14 +91,8 @@
                                    class="form-control"
                                    id="phoneId"
                                    formControlName="phone"/>
-                            <span class="help-block" *ngIf="(signUpForm.get('phone').touched || signUpForm.get('phone').dirty) && signUpForm.get('phone').errors">
-                                <span *ngIf="signUpForm.get('phone').errors.required">
-                                    Please enter your phone number.
-                                </span>
-                                <span *ngIf="!signUpForm.get('phone').errors.required && signUpForm.get('phone').errors.invalidMobile">
-                                    Please enter a valid mobile number.
-                                </span>
-
+                            <span class="help-block" *ngIf="phoneErrorMsg">
+                                {{phoneErrorMsg}}
                             </span>
                         </div>
                     </div>
@@ -146,9 +110,7 @@
                         </div>
                     </div>
                     <div class="form-group"
-                         [class.has-error]="(signUpForm.get('rating').touched ||
-                         signUpForm.get('rating').dirty) &&
-                         !signUpForm.get('rating').valid">
+                         [class.has-error]="ratingErrorMsg">
                         <label for="ratingId"
                                class="col-md-2 control-label">
                             Rating
@@ -158,19 +120,8 @@
                                    class="form-control"
                                    id="ratingId"
                                    formControlName="rating"/>
-                            <span class="help-block" *ngIf="(signUpForm.get('rating').touched || signUpForm.get('rating').dirty) && signUpForm.get('rating').errors">
-                                <span *ngIf="signUpForm.get('rating').errors.required">
-                                    Please enter rating.
-                                </span>
-                                <span *ngIf="signUpForm.get('rating').value && signUpForm.get('rating').errors.notANumber">
-                                    Please enter number only.
-                                </span>
-                                <span *ngIf="signUpForm.get('rating').value && signUpForm.get('rating').errors.lowOnRange">
-                                    Please enter rating >= 1.
-                                </span>
-                                <span *ngIf="signUpForm.get('rating').value && signUpForm.get('rating').errors.outOfRange">
-                                    Please enter rating <= 10.
-                                </span>
+                            <span class="help-block" *ngIf="ratingErrorMsg">
+                                {{ratingErrorMsg}}
                             </span>
                         </div>
                     </div>
