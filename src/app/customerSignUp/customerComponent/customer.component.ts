@@ -74,8 +74,10 @@ export class CustomerComponent implements OnInit {
         this.signUpForm.setValue({
             firstName: 'Abhishek',
             lastName: 'Jain',
-            email: 'abc@xyz',
-            confirmEmail: 'abc@xyz',
+            emailGroup: {
+                email: 'abc@xyz',
+                confirmEmail: 'abc@xyz'
+            },
             phone: '9957608288',
             notificationType: 'email',
             rating: 3.5,
@@ -92,17 +94,20 @@ export class CustomerComponent implements OnInit {
             this.phone.setValidators( [Validators.required, this.validationService.phoneNumberValidator] );
             this.email.clearValidators();
             this.confirmEmail.clearValidators();
+            this.signUpForm.get('emailGroup').clearValidators();
 
         } else if (value === 'email') {
             this.email.setValidators([Validators.required,
                 Validators.pattern(AppConstants.EMAIL_PATTERN) ]);
             this.confirmEmail.setValidators([Validators.required,
                 Validators.pattern(AppConstants.EMAIL_PATTERN) ]);
+            this.signUpForm.get('emailGroup').setValidators(this.validationService.emailMatcher);
             this.phone.clearValidators();
         }
         this.phone.updateValueAndValidity();
         this.email.updateValueAndValidity();
         this.confirmEmail.updateValueAndValidity();
+        this.signUpForm.get('emailGroup').updateValueAndValidity();
     }
 
     private setValidateNameMsg(value: string, controlType: string) {
