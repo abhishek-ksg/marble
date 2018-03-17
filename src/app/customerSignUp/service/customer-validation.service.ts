@@ -26,7 +26,7 @@ export class CustomerValidationService {
         outOfRange: 'Please enter rating <= 10.'
     };
 
-    public validateName(fc: FormControl, value: string): string {
+    public validateName(fc: FormControl): string {
         let firstNameErrorMsg = '';
         if ( (fc.touched || fc.dirty ) && fc.errors ) {
             firstNameErrorMsg = Object.keys(fc.errors).map( (error) =>
@@ -35,7 +35,7 @@ export class CustomerValidationService {
         return firstNameErrorMsg;
     }
 
-    public validateEmail(fc: FormControl, value: string): string {
+    public validateEmail(fc: FormControl): string {
         let emailErrorMsg = '';
         if ( (fc.touched || fc.dirty ) && fc.errors ) {
             emailErrorMsg = Object.keys(fc.errors).map( (error) =>
@@ -44,7 +44,7 @@ export class CustomerValidationService {
         return emailErrorMsg;
     }
 
-    public setPhoneErrMsg(fc: FormControl, value: string): string {
+    public setPhoneErrMsg(fc: FormControl): string {
         let phoneErrorMsg = '';
         if ( (fc.touched || fc.dirty ) && fc.errors ) {
             phoneErrorMsg = Object.keys(fc.errors).map( (error) =>
@@ -53,7 +53,7 @@ export class CustomerValidationService {
         return phoneErrorMsg;
     }
 
-    public setRatingErrMsg(fc: FormControl, value: string): string {
+    public setRatingErrMsg(fc: FormControl): string {
         let ratingErrorMsg = '';
         if ( (fc.touched || fc.dirty ) && fc.errors ) {
             ratingErrorMsg = Object.keys(fc.errors).map( (error) =>

@@ -19,7 +19,8 @@
                             <input type="text"
                                    class="form-control"
                                    id="firstNameId"
-                                   formControlName="firstName"/>
+                                   formControlName="firstName"
+                                   (blur)="setValidateNameMsg('firstName')"/>
                             <span class="help-block" *ngIf="firstNameErrorMsg">
                                 {{firstNameErrorMsg}}
                             </span>
@@ -35,7 +36,8 @@
                             <input type="text"
                                    class="form-control"
                                    id="lastNameId"
-                                   formControlName="lastName"/>
+                                   formControlName="lastName"
+                                   (blur)="setValidateNameMsg('lastName')"/>
                             <span class="help-block" *ngIf="lastNameErrorMsg">
                                 {{lastNameErrorMsg}}
                             </span>
@@ -53,7 +55,8 @@
                                 <input type="text"
                                     class="form-control"
                                     id="emailId"
-                                    formControlName="email"/>
+                                    formControlName="email"
+                                    (blur)="setValidateMailMsg('email')"/>
                                 <span class="help-block" *ngIf="emailErrorMsg">
                                     {{emailErrorMsg}}
                                 </span>
@@ -69,7 +72,8 @@
                                 <input type="text"
                                     class="form-control"
                                     id="confirmMailId"
-                                    formControlName="confirmEmail"/>
+                                    formControlName="confirmEmail"
+                                    (blur)="setValidateMailMsg('confirmEmail')"/>
                                 <span class="help-block" *ngIf="( confirmEmailErrorMsg || signUpForm.get('emailGroup').errors )">
                                     {{confirmEmailErrorMsg}}
                                     <span *ngIf="!confirmEmailErrorMsg && signUpForm.get('emailGroup').errors?.misMatch">
@@ -90,7 +94,8 @@
                             <input type="text"
                                    class="form-control"
                                    id="phoneId"
-                                   formControlName="phone"/>
+                                   formControlName="phone"
+                                   (blur)="setPhoneErrMsg()"/>
                             <span class="help-block" *ngIf="phoneErrorMsg">
                                 {{phoneErrorMsg}}
                             </span>
@@ -119,7 +124,8 @@
                             <input type="text"
                                    class="form-control"
                                    id="ratingId"
-                                   formControlName="rating"/>
+                                   formControlName="rating"
+                                   (blur)="setRatingErrMsg()"/>
                             <span class="help-block" *ngIf="ratingErrorMsg">
                                 {{ratingErrorMsg}}
                             </span>

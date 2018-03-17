@@ -51,22 +51,22 @@ export class CustomerComponent implements OnInit {
         notificationType.valueChanges.subscribe( (value: string) => this.notificationTypeChanged(value) );
 
         this.firstName = <FormControl>this.signUpForm.get('firstName');
-        this.firstName.valueChanges.debounceTime(500).subscribe( (value: string) => this.setValidateNameMsg(value, 'firstName'));
+        this.firstName.valueChanges.debounceTime(500).subscribe( (value: string) => this.setValidateNameMsg('firstName'));
 
         this.lastName = <FormControl>this.signUpForm.get('lastName');
-        this.lastName.valueChanges.debounceTime(500).subscribe( (value: string) => this.setValidateNameMsg(value, 'lastName'));
+        this.lastName.valueChanges.debounceTime(500).subscribe( (value: string) => this.setValidateNameMsg('lastName'));
 
         this.email = <FormControl>this.signUpForm.get('emailGroup.email');
-        this.email.valueChanges.debounceTime(500).subscribe( (value: string) => this.setValidateMailMsg(value, 'email'));
+        this.email.valueChanges.debounceTime(500).subscribe( (value: string) => this.setValidateMailMsg('email'));
 
         this.confirmEmail = <FormControl>this.signUpForm.get('emailGroup.confirmEmail');
-        this.confirmEmail.valueChanges.debounceTime(500).subscribe( (value: string) => this.setValidateMailMsg(value, 'confirmEmail'));
+        this.confirmEmail.valueChanges.debounceTime(500).subscribe( (value: string) => this.setValidateMailMsg('confirmEmail'));
 
         this.phone = <FormControl>this.signUpForm.get('phone');
-        this.phone.valueChanges.debounceTime(500).subscribe( (value: string) => this.setPhoneErrMsg(value));
+        this.phone.valueChanges.debounceTime(500).subscribe( (value: string) => this.setPhoneErrMsg());
 
         this.rating = <FormControl>this.signUpForm.get('rating');
-        this.rating.valueChanges.debounceTime(500).subscribe( (value: string) => this.setRatingErrMsg(value));
+        this.rating.valueChanges.debounceTime(500).subscribe( (value: string) => this.setRatingErrMsg());
 
     }
 
@@ -110,28 +110,28 @@ export class CustomerComponent implements OnInit {
         this.signUpForm.get('emailGroup').updateValueAndValidity();
     }
 
-    private setValidateNameMsg(value: string, controlType: string) {
+    private setValidateNameMsg(controlType: string) {
         if (controlType === 'firstName') {
-            this.firstNameErrorMsg = this.validationService.validateName(this.firstName, value);
+            this.firstNameErrorMsg = this.validationService.validateName(this.firstName);
         } else if (controlType === 'lastName') {
-            this.lastNameErrorMsg = this.validationService.validateName(this.lastName, value);
+            this.lastNameErrorMsg = this.validationService.validateName(this.lastName);
         }
     }
 
-    private setValidateMailMsg(value: string, controlType: string) {
+    private setValidateMailMsg(controlType: string) {
         if (controlType === 'email') {
-            this.emailErrorMsg = this.validationService.validateEmail(this.email, value);
+            this.emailErrorMsg = this.validationService.validateEmail(this.email);
         } else if (controlType === 'confirmEmail') {
-            this.confirmEmailErrorMsg = this.validationService.validateEmail(this.confirmEmail, value);
+            this.confirmEmailErrorMsg = this.validationService.validateEmail(this.confirmEmail);
         }
     }
 
-    private setPhoneErrMsg(value: string) {
-        this.phoneErrorMsg = this.validationService.setPhoneErrMsg(this.phone, value);
+    private setPhoneErrMsg() {
+        this.phoneErrorMsg = this.validationService.setPhoneErrMsg(this.phone);
     }
 
-    private setRatingErrMsg(value: string) {
-        this.ratingErrorMsg = this.validationService.setRatingErrMsg(this.rating, value);
+    private setRatingErrMsg() {
+        this.ratingErrorMsg = this.validationService.setRatingErrMsg(this.rating);
     }
 }
 
