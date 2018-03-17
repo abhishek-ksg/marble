@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component } from '@angular/core';
 
 @Component({
     templateUrl: './welcome.component.html',
@@ -6,5 +6,5 @@ import { Component } from "@angular/core";
 })
 export class WelcomeComponent {
     pageTitle: string = 'Welcome';
-    welcomeMessage: string = "Welcome to Amazon Product Management!";
+    welcomeMessage: string = 'Welcome to Amazon Product Management!';
 }

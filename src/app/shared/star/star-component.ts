@@ -1,11 +1,11 @@
-import { Component, Input, Output, EventEmitter, OnChanges } from "@angular/core";
+import { Component, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 
 @Component({
     selector: 'am-star',
     templateUrl: './star-component.html',
     styleUrls: ['./star-component.css']
 })
-export class StarComponent implements OnChanges{
+export class StarComponent implements OnChanges {
 
     @Input() currentRating: number;
     @Output() ratingClickedEvent: EventEmitter<string> = new EventEmitter<string>();
@@ -13,8 +13,8 @@ export class StarComponent implements OnChanges{
     maxStarWidth: number = 86;
     maxStarNumber: number = 5;
 
-    ngOnChanges(){
-        this.starWidth = (this.currentRating/this.maxStarNumber)*this.maxStarWidth;
+    ngOnChanges() {
+        this.starWidth = (this.currentRating / this.maxStarNumber) * this.maxStarWidth;
     }
 
     ratingClicked() {

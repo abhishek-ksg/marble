@@ -1,6 +1,6 @@
-import { Injectable } from "@angular/core";
-import { HttpClient, HttpErrorResponse } from '@angular/common/http'
-import { Observable } from "rxjs/Observable";
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
@@ -8,7 +8,7 @@ import 'rxjs/add/operator/delay';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/observable/throw';
 
-import { IProduct } from "../models/product.interface";
+import { IProduct } from '../models/product.interface';
 
 
 @Injectable()
@@ -17,20 +17,19 @@ export class ProductService {
     private productsUrl: string =  '../../../api/products/products.json';
     private cachedProduct: IProduct[] = [];
 
-    constructor( private _http: HttpClient ){
+    constructor( private _http: HttpClient ) {
 
     }
 
-    getProducts() : Observable<IProduct[]> {
+    getProducts(): Observable<IProduct[]> {
 
-        if(this.cachedProduct && this.cachedProduct.length > 0){
+        if (this.cachedProduct && this.cachedProduct.length > 0) {
             return Observable.of(this.cachedProduct);
-        }
-        else {
+        } else {
             return this._http.get<IProduct[]>(this.productsUrl)
-            .delay(4000)
+            .delay(1000)
             .do( (products) => {
-                console.log(JSON.stringify(products))
+                console.log(JSON.stringify(products));
                 this.cachedProduct = products;
             })
             .catch( this.handleError );

@@ -1,7 +1,7 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit } from '@angular/core';
 
-import { IProduct } from '../models/product.interface'
-import { ProductService } from "../services/product.service";
+import { IProduct } from '../models/product.interface';
+import { ProductService } from '../services/product.service';
 
 @Component({
     selector: 'am-products',
@@ -51,10 +51,10 @@ export class ProductListComponent implements OnInit {
         console.log(`**** Error **** ${error}`);
     }
 
-    private filterProducts() : IProduct[] {
-        let filterBy = this.filterText.toLocaleLowerCase();
+    private filterProducts(): IProduct[] {
+        const filterBy = this.filterText.toLocaleLowerCase();
         return this.products.filter( (product: IProduct) => {
             return product.productName.toLocaleLowerCase().indexOf(filterBy) !== -1;
-        })
+        });
     }
 }

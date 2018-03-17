@@ -2,7 +2,7 @@ export class EmployeeModel {
     private _firstName: string;
     private _lastName: string;
 
-    constructor(firstName, lastName, public isFTE: boolean, public paytype: string, public language: string){
+    constructor(firstName, lastName, public isFTE: boolean, public paytype: string, public language: string) {
         this.firstName = firstName;
         this.lastName = lastName;
     }
@@ -11,7 +11,7 @@ export class EmployeeModel {
         this._firstName = this.getNameFormat(value);
     }
 
-    get firstName(): string{
+    get firstName(): string {
         return this._firstName;
     }
 
@@ -19,11 +19,11 @@ export class EmployeeModel {
         this._lastName = this.getNameFormat(value);
     }
 
-    get lastName(): string{
+    get lastName(): string {
         return this._lastName;
     }
 
-    private getNameFormat(value: string): string{
+    private getNameFormat(value: string): string {
         return value.charAt(0).toLocaleUpperCase() + value.slice(1);
     }
 }

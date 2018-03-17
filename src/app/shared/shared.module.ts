@@ -1,14 +1,15 @@
-import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
-import { FormsModule } from "@angular/forms";
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { ConvertToSpacesPipe } from "./pipes/convert-to-spaces.pipe";
-import { StarComponent } from "./star/star-component";
+import { ConvertToSpacesPipe } from './pipes/convert-to-spaces.pipe';
+import { StarComponent } from './star/star-component';
 
 @NgModule({
     imports: [
         CommonModule,
-        FormsModule
+        FormsModule,
+        ReactiveFormsModule
     ],
     declarations: [
         ConvertToSpacesPipe,
