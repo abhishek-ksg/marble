@@ -1,3 +1,4 @@
+import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -8,25 +9,28 @@ import { SharedModule } from '../shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { ProductDetailGuardService } from './services/product-detail-guard.service';
+import { ProductEditComponent } from './product-edit/product-edit.component';
 
 @NgModule({
     imports: [
         HttpClientModule,
         SharedModule,
         AngularMaterilModule,
+        ReactiveFormsModule,
         RouterModule.forChild([
             {path: 'products', component: ProductListComponent},
+            {path: 'addproduct', component: ProductEditComponent},
             {path: 'products/:id', canActivate: [ProductDetailGuardService], component: ProductDetailComponent}
         ])
     ],
     declarations: [
         ProductListComponent,
-        ProductDetailComponent
+        ProductDetailComponent,
+        ProductEditComponent
     ],
     providers: [
         ProductService,
         ProductDetailGuardService
-
     ]
 
 })
