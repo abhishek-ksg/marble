@@ -1,0 +1,93 @@
+<div class="container-fluid">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            {{pageTitle}}
+        </div>
+
+        <div class="panel-body">
+            <form class="form-horizontal"
+                  novalidate
+                  [formGroup]="productForm"
+                  (submit)="saveProduct()">
+                <fieldset>
+                    <div class="form-group">
+                        <label for="productNameId"
+                               class="col-md-2 control-label">
+                            Product Name
+                        </label>
+                        <div class="col-md-8">
+                            <input type="text"
+                                   class="form-control"
+                                   id="productNameId"
+                                   formControlName="productName"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="productCodeId"
+                               class="col-md-2 control-label">
+                            Product Code
+                        </label>
+                        <div class="col-md-8">
+                            <input type="text"
+                                   class="form-control"
+                                   id="productCodeId"
+                                   formControlName="productCode"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="productRatingId"
+                               class="col-md-2 control-label">
+                            Star Rating (1-5)
+                        </label>
+                        <div class="col-md-8">
+                            <input type="text"
+                                   class="form-control"
+                                   id="productRatingId"
+                                   formControlName="starRating"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-4 col-md-offset-2">
+                            <button class="btn btn-primary"
+                                type="button"
+                                (click)="addNewTag()">
+                                Add Tag
+                            </button>
+                        </div>
+                    </div>
+
+                    <div formArrayName="tags"
+                         *ngFor="let tag of tags.controls; let i=index">
+                        <div class="form-group">
+                            <label [attr.for]="i"
+                                class="col-md-2 control-label">
+                                Tag
+                            </label>
+                            <div class="col-md-8">
+                                <input type="text"
+                                    class="form-control"
+                                    [id]="i"
+                                    [formControlName]="i"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="productDescId"
+                               class="col-md-2 control-label">
+                            Description
+                        </label>
+                        <div class="col-md-8">
+                            <textarea type="text"
+                                   class="form-control"
+                                   id="productDescId"
+                                   rows="3"
+                                   formControlName="description">
+                            </textarea>
+                        </div>
+                    </div>
+                </fieldset>
+
+            </form>
+        </div>
+    </div>
+</div>
