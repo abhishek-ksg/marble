@@ -1,8 +1,13 @@
+import { IProduct } from './../models/product.interface';
+import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { NumberValidators } from './../../shared/validators/number.validators';
 import { FormGroup, FormBuilder, FormArray, FormControlName, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit, AfterViewInit, ElementRef, ViewChildren } from '@angular/core';
 import { GenericValidator } from '../../shared/validators/generic.validator';
+import { Subscription } from 'rxjs/Subscription';
+
+import { ProductService } from './../services/product.service';
 
 @Component({
     templateUrl: './product-edit.component.html'
@@ -12,11 +17,17 @@ export class ProductEditComponent implements OnInit, AfterViewInit {
     productForm: FormGroup;
     @ViewChildren(FormControlName, { read: ElementRef }) formInputElements: ElementRef[];
     displayMessage: {[key: string]: string} = {};
+    productDataErr: string;
 
     private validationErrMsgs: {[key: string]: {[key: string]: string}};
     private genericValidator: GenericValidator;
+    private sub: Subscription;
+    private product: IProduct;
 
-    constructor(private fb: FormBuilder) {
+    constructor(private fb: FormBuilder,
+                private route: ActivatedRoute,
+                private router: Router,
+                private productService: ProductService) {
         this.validationErrMsgs = {
             'productName': {
                 'required': 'Please enter the product name',
@@ -51,6 +62,11 @@ export class ProductEditComponent implements OnInit, AfterViewInit {
             tags: this.fb.array([]),
             description: ''
         });
+
+        this.sub = this.route.paramMap.subscribe( (params: ParamMap) => {
+            const productId = +params.get('id');
+            this.getProductData(productId);
+        });
     }
 
     ngAfterViewInit() {
@@ -66,5 +82,29 @@ export class ProductEditComponent implements OnInit, AfterViewInit {
 
     addNewTag() {
         this.tags.push(new FormControl('', Validators.required));
+    }
+
+    private getProductData(productId: number): void {
+        this.productService.getProductData(productId)
+            .subscribe( (product: IProduct) => this.onProductDataReceived(product),
+                        ( error: any ) => this.productDataErr = <any>error);
+    }
+
+    private onProductDataReceived(product: IProduct): void {
+        if (this.productForm) {
+            this.productForm.reset();
+        }
+
+        this.product = product;
+
+        this.productForm.patchValue({
+            productName: this.product.productName,
+            productCode: this.product.productCode,
+            starRating: this.product.starRating,
+            description: this.product.description
+        });
+
+        // Replace the existing tags AbstractControl
+        this.productForm.setControl('tags', this.fb.array(this.product.tags || []));
     }
 }

@@ -104,6 +104,9 @@
                 </fieldset>
 
             </form>
+            <div *ngIf="productDataErr" [class.has-error]="productDataErr">
+                {{productDataErr}}
+            </div>
         </div>
     </div>
 </div>

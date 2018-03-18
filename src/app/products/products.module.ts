@@ -19,7 +19,7 @@ import { ProductEditComponent } from './product-edit/product-edit.component';
         ReactiveFormsModule,
         RouterModule.forChild([
             {path: 'products', component: ProductListComponent},
-            {path: 'addproduct', component: ProductEditComponent},
+            {path: 'addproduct/:id', component: ProductEditComponent},
             {path: 'products/:id', canActivate: [ProductDetailGuardService], component: ProductDetailComponent}
         ])
     ],

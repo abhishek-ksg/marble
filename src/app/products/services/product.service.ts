@@ -37,6 +37,11 @@ export class ProductService {
     }
 
     getProductData(id: number): Observable<IProduct> {
+
+        if (id === 0) {
+            return Observable.of(this.getInitializedProduct());
+        }
+
         return this.getProducts()
             .map( ( products: Array<IProduct> ) =>  products.find( (p: IProduct ) => p.productId === id ) );
     }
@@ -48,5 +53,19 @@ export class ProductService {
 
     private handleError(err: HttpErrorResponse) {
         return Observable.throw(err.message);
+    }
+
+    private getInitializedProduct(): IProduct {
+        return {
+            productId: 0,
+            productName: null,
+            productCode: null,
+            releaseDate: null,
+            description: null,
+            tags: [],
+            price: null,
+            starRating: null,
+            imageUrl: null
+        };
     }
 }
