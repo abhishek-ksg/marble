@@ -39,7 +39,7 @@
                             <td><a [routerLink]="['/products', product.productId]">{{product.productName}}</a></td>
                             <td>{{product.productCode | lowercase | converttospaces:'-'}}</td>
                             <td>{{product.releaseDate}}</td>
-                            <td>{{product.price | currency:USD:true:'1.2-2'}}</td>
+                            <td>{{product.price | currency:USD:'symbol':'1.2-2'}}</td>
                             <td><am-star [currentRating]='product.starRating'
                                         (ratingClickedEvent)='onRatingClicked($event)'></am-star></td>
                         </tr>
