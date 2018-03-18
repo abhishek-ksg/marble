@@ -10,7 +10,8 @@ import { Subscription } from 'rxjs/Subscription';
 import { ProductService } from './../services/product.service';
 
 @Component({
-    templateUrl: './product-edit.component.html'
+    templateUrl: './product-edit.component.html',
+    styleUrls: ['./product-edit.component.css']
 })
 export class ProductEditComponent implements OnInit, AfterViewInit {
 
@@ -83,6 +84,12 @@ export class ProductEditComponent implements OnInit, AfterViewInit {
 
     addNewTag() {
         this.tags.push(new FormControl('', Validators.required));
+    }
+
+    deleteTag(i: number): void {
+        this.product.tags.splice(i, 1);
+        this.productForm.setControl('tags', this.fb.array(this.product.tags));
+        this.tags.markAsDirty();
     }
 
     saveProduct() {

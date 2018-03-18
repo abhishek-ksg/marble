@@ -44,7 +44,12 @@
                             <td><am-star [currentRating]='product.starRating'
                                         (ratingClickedEvent)='onRatingClicked($event)'></am-star></td>
                             <td>
-                                <button class="btn btn-primary" type="button" [routerLink]="['/addproduct', product.id]">Edit</button>
+                                <button class="btn btn-primary"
+                                               type="button"
+                                               [routerLink]="['/addproduct', product.id]"
+                                               class="btn btn-primary full-width-button">
+                                    Edit
+                                </button>
                             </td>
                         </tr>
                     </tbody>

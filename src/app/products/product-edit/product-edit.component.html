@@ -80,11 +80,18 @@
                                 class="col-md-2 control-label">
                                 Tag
                             </label>
-                            <div class="col-md-8">
+                            <div class="col-md-7">
                                 <input type="text"
                                     class="form-control"
                                     [id]="i"
                                     [formControlName]="i"/>
+                            </div>
+                            <div class="col-md-1">
+                                <button class="btn btn-danger full-width-button"
+                                        (click)="deleteTag(i)"
+                                        type="button">
+                                    Delete
+                                </button>
                             </div>
                         </div>
                     </div>
