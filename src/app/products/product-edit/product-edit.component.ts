@@ -85,6 +85,39 @@ export class ProductEditComponent implements OnInit, AfterViewInit {
         this.tags.push(new FormControl('', Validators.required));
     }
 
+    saveProduct() {
+        if (this.productForm.dirty && this.productForm.valid) {
+            const newProduct = Object.assign({}, this.product, this.productForm.value);
+            this.productService.saveProduct(newProduct)
+                .subscribe(
+                    (product: IProduct) => this.onSaveComplete(),
+                    (err) => this.productDataErr = <any>err
+                );
+        } else if (!this.productForm.dirty) {
+            this.onSaveComplete();
+        }
+    }
+
+    deleteProduct() {
+        if (this.product.id === 0) {
+            // Don't delete, it was never saved.
+            this.onSaveComplete();
+        } else {
+            if (confirm(`Really delete the product: ${this.product.productName}?`)) {
+                this.productService.deleteProduct(this.product.id)
+                    .subscribe(
+                        () => this.onSaveComplete(),
+                        (error: any) => this.productDataErr = <any>error
+                    );
+            }
+        }
+    }
+
+    private onSaveComplete(): void {
+        this.productForm.reset();
+        this.router.navigate(['/products']);
+    }
+
     private getProductData(productId: number): void {
         this.productService.getProductData(productId)
             .subscribe( (product: IProduct) => this.onProductDataReceived(product),

@@ -102,6 +102,30 @@
                             </textarea>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <div class="col-md-4 col-md-offset-2">
+                            <span>
+                                <button class="btn btn-primary"
+                                        type="submit"
+                                        [disabled]="!productForm.valid">Save
+                                </button>
+                            </span>
+                            <span>
+                                <button class="btn btn-warning"
+                                        type="button"
+                                        [routerLink]="['/products']">
+                                    Cancel
+                                </button>
+                            </span>
+                            <span>
+                                <button class="btn btn-danger"
+                                        type="button"
+                                        (click)="deleteProduct()">
+                                    Delete
+                                </button>
+                            </span>
+                        </div>
+                    </div>
                 </fieldset>
 
             </form>
