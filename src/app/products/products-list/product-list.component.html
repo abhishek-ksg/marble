@@ -30,6 +30,7 @@
                             <th>Available</th>
                             <th>Price</th>
                             <th>5 Star Rating</th>
+                            <th>Edit Product</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -42,6 +43,9 @@
                             <td>{{product.price | currency:USD:'symbol':'1.2-2'}}</td>
                             <td><am-star [currentRating]='product.starRating'
                                         (ratingClickedEvent)='onRatingClicked($event)'></am-star></td>
+                            <td>
+                                <button class="btn btn-primary" type="button" [routerLink]="['/addproduct', product.id]">Edit</button>
+                            </td>
                         </tr>
                     </tbody>
                   </table>
