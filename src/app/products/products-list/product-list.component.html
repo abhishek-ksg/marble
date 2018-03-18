@@ -30,18 +30,27 @@
                             <th>Available</th>
                             <th>Price</th>
                             <th>5 Star Rating</th>
+                            <th>Edit Product</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor='let product of filteredProducts'>
                             <td><img [src]='product.imageUrl' [title]='product.productName'
                                 [style.width.px]='imageWidth' *ngIf='showImage'></td>
-                            <td><a [routerLink]="['/products', product.productId]">{{product.productName}}</a></td>
+                            <td><a [routerLink]="['/products', product.id]">{{product.productName}}</a></td>
                             <td>{{product.productCode | lowercase | converttospaces:'-'}}</td>
                             <td>{{product.releaseDate}}</td>
-                            <td>{{product.price | currency:USD:true:'1.2-2'}}</td>
+                            <td>{{product.price | currency:USD:'symbol':'1.2-2'}}</td>
                             <td><am-star [currentRating]='product.starRating'
                                         (ratingClickedEvent)='onRatingClicked($event)'></am-star></td>
+                            <td>
+                                <button class="btn btn-primary"
+                                               type="button"
+                                               [routerLink]="['/addproduct', product.id]"
+                                               class="btn btn-primary full-width-button">
+                                    Edit
+                                </button>
+                            </td>
                         </tr>
                     </tbody>
                   </table>

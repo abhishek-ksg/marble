@@ -1,6 +1,7 @@
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 
 import { AngularMaterilModule } from './../angularmaterial/angularmaterial.module';
 import { ProductService } from './services/product.service';
@@ -10,6 +11,8 @@ import { RouterModule } from '@angular/router';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { ProductDetailGuardService } from './services/product-detail-guard.service';
 import { ProductEditComponent } from './product-edit/product-edit.component';
+import { ProductData } from './services/product.db';
+import { ProductEditDeactivateService } from './services/product-edit-deactivate.service';
 
 @NgModule({
     imports: [
@@ -17,9 +20,11 @@ import { ProductEditComponent } from './product-edit/product-edit.component';
         SharedModule,
         AngularMaterilModule,
         ReactiveFormsModule,
+        InMemoryWebApiModule.forRoot(ProductData),
         RouterModule.forChild([
             {path: 'products', component: ProductListComponent},
-            {path: 'addproduct', component: ProductEditComponent},
+            {path: 'addproduct/:id', canActivate: [ProductDetailGuardService],
+                    canDeactivate: [ProductEditDeactivateService], component: ProductEditComponent},
             {path: 'products/:id', canActivate: [ProductDetailGuardService], component: ProductDetailComponent}
         ])
     ],
@@ -30,7 +35,8 @@ import { ProductEditComponent } from './product-edit/product-edit.component';
     ],
     providers: [
         ProductService,
-        ProductDetailGuardService
+        ProductDetailGuardService,
+        ProductEditDeactivateService
     ]
 
 })

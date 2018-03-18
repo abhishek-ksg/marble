@@ -20,6 +20,10 @@ export class ProductDetailGuardService implements CanActivate {
 
         const productId = +route.paramMap.get('id');
 
+        if (productId === 0 && route.routeConfig.path.indexOf('addproduct') !== -1) {
+            return Observable.of(true);
+        }
+
         if (!isNaN(productId) && productId > 0) {
 
             return this.productService.getProductsId()
