@@ -10,7 +10,8 @@
                   [formGroup]="productForm"
                   (submit)="saveProduct()">
                 <fieldset>
-                    <div class="form-group">
+                    <div class="form-group"
+                         [class.has-error]="displayMessage.productName">
                         <label for="productNameId"
                                class="col-md-2 control-label">
                             Product Name
@@ -20,9 +21,14 @@
                                    class="form-control"
                                    id="productNameId"
                                    formControlName="productName"/>
+                            <span class="help-block"
+                                  *ngIf="displayMessage.productName">
+                                  {{displayMessage.productName}}
+                            </span>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group"
+                        [class.has-error]="displayMessage.productCode">
                         <label for="productCodeId"
                                class="col-md-2 control-label">
                             Product Code
@@ -32,9 +38,14 @@
                                    class="form-control"
                                    id="productCodeId"
                                    formControlName="productCode"/>
+                            <span class="help-block"
+                                *ngIf="displayMessage.productCode">
+                                {{displayMessage.productCode}}
+                            </span>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group"
+                        [class.has-error]="displayMessage.starRating">
                         <label for="productRatingId"
                                class="col-md-2 control-label">
                             Star Rating (1-5)
@@ -44,6 +55,10 @@
                                    class="form-control"
                                    id="productRatingId"
                                    formControlName="starRating"/>
+                            <span class="help-block"
+                                *ngIf="displayMessage.starRating">
+                                {{displayMessage.starRating}}
+                            </span>
                         </div>
                     </div>
                     <div class="form-group">

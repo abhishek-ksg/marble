@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, FormControl, Validators, FormArray } from '@ang
 import { Customer } from '../model/customer';
 import { AppConstants } from '../../app.constants';
 import { CustomerValidationService } from '../service/customer-validation.service';
+import { NumberValidators } from '../../shared/validators/number.validators';
 
 @Component({
     templateUrl: './customer.component.html',
@@ -43,7 +44,7 @@ export class CustomerComponent implements OnInit {
             }, {validator: this.validationService.emailMatcher}),
             phone: '',
             notificationType: 'email',
-            rating: ['', [ Validators.required, this.validationService.customRangeValidator(1, 10) ] ],
+            rating: ['', [ Validators.required, NumberValidators.rangeValidator(1, 10) ] ],
             sendCatalog: false,
             addresses: this.fb.array([this.getAddressBlock()])
         });
