@@ -12,6 +12,7 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
 import { ProductDetailGuardService } from './services/product-detail-guard.service';
 import { ProductEditComponent } from './product-edit/product-edit.component';
 import { ProductData } from './services/product.db';
+import { ProductEditDeactivateService } from './services/product-edit-deactivate.service';
 
 @NgModule({
     imports: [
@@ -22,7 +23,8 @@ import { ProductData } from './services/product.db';
         InMemoryWebApiModule.forRoot(ProductData),
         RouterModule.forChild([
             {path: 'products', component: ProductListComponent},
-            {path: 'addproduct/:id', component: ProductEditComponent},
+            {path: 'addproduct/:id', canActivate: [ProductDetailGuardService],
+                    canDeactivate: [ProductEditDeactivateService], component: ProductEditComponent},
             {path: 'products/:id', canActivate: [ProductDetailGuardService], component: ProductDetailComponent}
         ])
     ],
@@ -33,7 +35,8 @@ import { ProductData } from './services/product.db';
     ],
     providers: [
         ProductService,
-        ProductDetailGuardService
+        ProductDetailGuardService,
+        ProductEditDeactivateService
     ]
 
 })

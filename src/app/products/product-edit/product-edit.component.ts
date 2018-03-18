@@ -18,11 +18,12 @@ export class ProductEditComponent implements OnInit, AfterViewInit {
     @ViewChildren(FormControlName, { read: ElementRef }) formInputElements: ElementRef[];
     displayMessage: {[key: string]: string} = {};
     productDataErr: string;
+    pageTitle: string = 'Add Product';
+    product: IProduct;
 
     private validationErrMsgs: {[key: string]: {[key: string]: string}};
     private genericValidator: GenericValidator;
     private sub: Subscription;
-    private product: IProduct;
 
     constructor(private fb: FormBuilder,
                 private route: ActivatedRoute,
@@ -96,6 +97,12 @@ export class ProductEditComponent implements OnInit, AfterViewInit {
         }
 
         this.product = product;
+
+        if (this.product.id === 0) {
+            this.pageTitle = 'Add Product';
+        } else {
+            this.pageTitle = 'Edit Product: ' + this.product.productName;
+        }
 
         this.productForm.patchValue({
             productName: this.product.productName,
