@@ -1,4 +1,5 @@
 import { FormGroup } from '@angular/forms';
+import { AbstractControl } from '@angular/forms/src/model';
 
 // Generic validator for Reactive forms
 // Implemented as a class, not a service, so it can retain state for multiple forms.
@@ -30,20 +31,11 @@ export class GenericValidator {
                 const c = container.controls[controlKey];
                 // If it is a FormGroup, process its child controls.
                 if (c instanceof FormGroup) {
+                    this.populateMsgForControl(c, controlKey, messages);
                     const childMessages = this.processMessages(c);
                     Object.assign(messages, childMessages);
                 } else {
-                    // Only validate if there are validation messages for the control
-                    if (this.validationMessages[controlKey]) {
-                        messages[controlKey] = '';
-                        if ((c.dirty || c.touched) && c.errors) {
-                            Object.keys(c.errors).map(messageKey => {
-                                if (this.validationMessages[controlKey][messageKey]) {
-                                    messages[controlKey] += this.validationMessages[controlKey][messageKey] + ' ';
-                                }
-                            });
-                        }
-                    }
+                    this.populateMsgForControl(c, controlKey, messages);
                 }
             }
         }
@@ -61,5 +53,19 @@ export class GenericValidator {
             }
         }
         return errorCount;
+    }
+
+    private populateMsgForControl(c: AbstractControl, controlKey: string, messages: Object) {
+        // Only validate if there are validation messages for the control
+        if (this.validationMessages[controlKey]) {
+            messages[controlKey] = '';
+            if ((c.dirty || c.touched) && c.errors) {
+                Object.keys(c.errors).map(messageKey => {
+                    if (this.validationMessages[controlKey][messageKey]) {
+                        messages[controlKey] += this.validationMessages[controlKey][messageKey] + ' ';
+                    }
+                });
+            }
+        }
     }
 }
