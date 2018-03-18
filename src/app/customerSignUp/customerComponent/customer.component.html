@@ -10,7 +10,7 @@
                   (submit)="submitSignUpForm()">
                 <fieldset>
                     <div class="form-group"
-                        [class.has-error]="firstNameErrorMsg">
+                        [class.has-error]="errMsg.firstName">
                         <label for="firstNameId"
                                class="col-md-2 control-label">
                             First Name
@@ -19,15 +19,14 @@
                             <input type="text"
                                    class="form-control"
                                    id="firstNameId"
-                                   formControlName="firstName"
-                                   (blur)="setValidateNameMsg('firstName')"/>
-                            <span class="help-block" *ngIf="firstNameErrorMsg">
-                                {{firstNameErrorMsg}}
+                                   formControlName="firstName"/>
+                            <span class="help-block" *ngIf="errMsg.firstName">
+                                {{errMsg.firstName}}
                             </span>
                         </div>
                     </div>
                     <div class="form-group"
-                         [class.has-error]="lastNameErrorMsg">
+                         [class.has-error]="errMsg.lastName">
                         <label for="lastNameId"
                                class="col-md-2 control-label">
                             Last Name
@@ -36,17 +35,16 @@
                             <input type="text"
                                    class="form-control"
                                    id="lastNameId"
-                                   formControlName="lastName"
-                                   (blur)="setValidateNameMsg('lastName')"/>
-                            <span class="help-block" *ngIf="lastNameErrorMsg">
-                                {{lastNameErrorMsg}}
+                                   formControlName="lastName"/>
+                            <span class="help-block" *ngIf="errMsg.lastName">
+                                {{errMsg.lastName}}
                             </span>
                         </div>
                     </div>
                     <div formGroupName="emailGroup"
-                         [class.has-error]="signUpForm.get('emailGroup').errors">
+                         [class.has-error]="errMsg.emailGroup">
                         <div class="form-group"
-                             [class.has-error]="emailErrorMsg">
+                             [class.has-error]="errMsg.email">
                             <label for="emailId"
                                 class="col-md-2 control-label">
                                 Email
@@ -55,15 +53,14 @@
                                 <input type="text"
                                     class="form-control"
                                     id="emailId"
-                                    formControlName="email"
-                                    (blur)="setValidateMailMsg('email')"/>
-                                <span class="help-block" *ngIf="emailErrorMsg">
-                                    {{emailErrorMsg}}
+                                    formControlName="email"/>
+                                <span class="help-block" *ngIf="errMsg.email">
+                                    {{errMsg.email}}
                                 </span>
                             </div>
                         </div>
                         <div class="form-group"
-                            [class.has-error]="confirmEmailErrorMsg">
+                            [class.has-error]="errMsg.confirmEmail">
                             <label for="confirmMailId"
                                 class="col-md-2 control-label">
                                 Confirm Mail
@@ -72,20 +69,19 @@
                                 <input type="text"
                                     class="form-control"
                                     id="confirmMailId"
-                                    formControlName="confirmEmail"
-                                    (blur)="setValidateMailMsg('confirmEmail')"/>
-                                <span class="help-block" *ngIf="( confirmEmailErrorMsg || signUpForm.get('emailGroup').errors )">
-                                    {{confirmEmailErrorMsg}}
-                                    <span *ngIf="!confirmEmailErrorMsg && signUpForm.get('emailGroup').errors?.misMatch">
-                                        Confirmation email not matching email.
-                                    </span>
+                                    formControlName="confirmEmail"/>
+                                <span class="help-block" *ngIf="errMsg.confirmEmail">
+                                    {{errMsg.confirmEmail}}
+                                </span>
+                                <span class="help-block" *ngIf="errMsg.emailGroup">
+                                    {{errMsg.emailGroup}}
                                 </span>
                             </div>
                         </div>
                     </div>
 
                     <div class="form-group"
-                        [class.has-error]="phoneErrorMsg">
+                        [class.has-error]="errMsg.phone">
                         <label for="phoneId"
                                class="col-md-2 control-label">
                             Phone
@@ -94,10 +90,9 @@
                             <input type="text"
                                    class="form-control"
                                    id="phoneId"
-                                   formControlName="phone"
-                                   (blur)="setPhoneErrMsg()"/>
-                            <span class="help-block" *ngIf="phoneErrorMsg">
-                                {{phoneErrorMsg}}
+                                   formControlName="phone"/>
+                            <span class="help-block" *ngIf="errMsg.phone">
+                                {{errMsg.phone}}
                             </span>
                         </div>
                     </div>
@@ -115,7 +110,7 @@
                         </div>
                     </div>
                     <div class="form-group"
-                         [class.has-error]="ratingErrorMsg">
+                         [class.has-error]="errMsg.rating">
                         <label for="ratingId"
                                class="col-md-2 control-label">
                             Rating
@@ -124,10 +119,9 @@
                             <input type="text"
                                    class="form-control"
                                    id="ratingId"
-                                   formControlName="rating"
-                                   (blur)="setRatingErrMsg()"/>
-                            <span class="help-block" *ngIf="ratingErrorMsg">
-                                {{ratingErrorMsg}}
+                                   formControlName="rating"/>
+                            <span class="help-block" *ngIf="errMsg.rating">
+                                {{errMsg.rating}}
                             </span>
                         </div>
                     </div>

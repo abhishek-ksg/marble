@@ -1,38 +1,38 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
+import { Observable } from 'rxjs/Observable';
+import { Component, OnInit, ElementRef, ViewChildren, AfterViewInit } from '@angular/core';
+import { FormBuilder, FormGroup, FormControl, Validators, FormArray, FormControlName } from '@angular/forms';
 
 import { Customer } from '../model/customer';
 import { AppConstants } from '../../app.constants';
 import { CustomerValidationService } from '../service/customer-validation.service';
 import { NumberValidators } from '../../shared/validators/number.validators';
+import { GenericValidator } from './../../shared/validators/generic.validator';
 
 @Component({
     templateUrl: './customer.component.html',
     styleUrls: ['./customer.component.css'],
     providers: [CustomerValidationService]
 })
-export class CustomerComponent implements OnInit {
+export class CustomerComponent implements OnInit, AfterViewInit {
 
     public customer: Customer = new Customer();
     public signUpForm: FormGroup;
+    public errMsg: {[key: string]: string} = {};
+
+    @ViewChildren(FormControlName, { read: ElementRef }) formInputElements: ElementRef[];
+    private custmerFormErrMsgs: {[key: string]: {[key: string]: string}};
+    private genericValidator: GenericValidator;
 
     // FormControls
-    private firstName: FormControl;
-    private lastName: FormControl;
     private email: FormControl;
     private confirmEmail: FormControl;
     private phone: FormControl;
-    private rating: FormControl;
 
-    // FormControlsError
-    public firstNameErrorMsg: string = '';
-    public lastNameErrorMsg: string = '';
-    public emailErrorMsg: string = '';
-    public confirmEmailErrorMsg: string = '';
-    public phoneErrorMsg: string = '';
-    public ratingErrorMsg: string = '';
+    constructor(public fb: FormBuilder, private validationService: CustomerValidationService) {
 
-    constructor(public fb: FormBuilder, private validationService: CustomerValidationService) { }
+        this.custmerFormErrMsgs = this.validationService.customerFormErrMsgs;
+        this.genericValidator = new GenericValidator(this.custmerFormErrMsgs);
+    }
 
     ngOnInit() {
         this.signUpForm = this.fb.group({
@@ -51,25 +51,17 @@ export class CustomerComponent implements OnInit {
 
         const notificationType = this.signUpForm.get('notificationType');
         notificationType.valueChanges.subscribe( (value: string) => this.notificationTypeChanged(value) );
+    }
 
-        this.firstName = <FormControl>this.signUpForm.get('firstName');
-        this.firstName.valueChanges.debounceTime(500).subscribe( (value: string) => this.setValidateNameMsg('firstName'));
+    ngAfterViewInit() {
+        // Watch for the blur event from any input element on the form.
+        const controlBlurs: Observable<any>[] = this.formInputElements
+            .map((formControl: ElementRef) => Observable.fromEvent(formControl.nativeElement, 'blur'));
 
-        this.lastName = <FormControl>this.signUpForm.get('lastName');
-        this.lastName.valueChanges.debounceTime(500).subscribe( (value: string) => this.setValidateNameMsg('lastName'));
-
-        this.email = <FormControl>this.signUpForm.get('emailGroup.email');
-        this.email.valueChanges.debounceTime(500).subscribe( (value: string) => this.setValidateMailMsg('email'));
-
-        this.confirmEmail = <FormControl>this.signUpForm.get('emailGroup.confirmEmail');
-        this.confirmEmail.valueChanges.debounceTime(500).subscribe( (value: string) => this.setValidateMailMsg('confirmEmail'));
-
-        this.phone = <FormControl>this.signUpForm.get('phone');
-        this.phone.valueChanges.debounceTime(500).subscribe( (value: string) => this.setPhoneErrMsg());
-
-        this.rating = <FormControl>this.signUpForm.get('rating');
-        this.rating.valueChanges.debounceTime(500).subscribe( (value: string) => this.setRatingErrMsg());
-
+        // Merge the blur event observable with the valueChanges observable
+        Observable.merge(this.signUpForm.valueChanges, ...controlBlurs).debounceTime(800).subscribe(value => {
+            this.errMsg = this.genericValidator.processMessages(this.signUpForm);
+        });
     }
 
     get addresses(): FormArray {
@@ -101,6 +93,10 @@ export class CustomerComponent implements OnInit {
     }
 
     private notificationTypeChanged(value: string) {
+        this.phone = <FormControl>this.signUpForm.get('phone');
+        this.email = <FormControl>this.signUpForm.get('emailGroup.email');
+        this.confirmEmail = <FormControl>this.signUpForm.get('emailGroup.confirmEmail');
+
         if (value === 'phone') {
             this.phone.setValidators( [Validators.required, this.validationService.phoneNumberValidator] );
             this.email.clearValidators();
@@ -119,30 +115,6 @@ export class CustomerComponent implements OnInit {
         this.email.updateValueAndValidity();
         this.confirmEmail.updateValueAndValidity();
         this.signUpForm.get('emailGroup').updateValueAndValidity();
-    }
-
-    private setValidateNameMsg(controlType: string) {
-        if (controlType === 'firstName') {
-            this.firstNameErrorMsg = this.validationService.validateName(this.firstName);
-        } else if (controlType === 'lastName') {
-            this.lastNameErrorMsg = this.validationService.validateName(this.lastName);
-        }
-    }
-
-    private setValidateMailMsg(controlType: string) {
-        if (controlType === 'email') {
-            this.emailErrorMsg = this.validationService.validateEmail(this.email);
-        } else if (controlType === 'confirmEmail') {
-            this.confirmEmailErrorMsg = this.validationService.validateEmail(this.confirmEmail);
-        }
-    }
-
-    private setPhoneErrMsg() {
-        this.phoneErrorMsg = this.validationService.setPhoneErrMsg(this.phone);
-    }
-
-    private setRatingErrMsg() {
-        this.ratingErrorMsg = this.validationService.setRatingErrMsg(this.rating);
     }
 
     private getAddressBlock() {
