@@ -87,6 +87,7 @@ export class ProductEditComponent implements OnInit, AfterViewInit {
     }
 
     deleteTag(i: number): void {
+        this.product.tags = this.tags.value;
         this.product.tags.splice(i, 1);
         this.productForm.setControl('tags', this.fb.array(this.product.tags));
         this.tags.markAsDirty();
