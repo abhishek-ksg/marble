@@ -1,4 +1,4 @@
-import { FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, FormArray, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -25,6 +25,6 @@ export class ProductEditComponent implements OnInit {
     }
 
     addNewTag() {
-        this.tags.push(new FormControl());
+        this.tags.push(new FormControl('', Validators.required));
     }
 }
