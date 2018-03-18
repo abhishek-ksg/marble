@@ -106,5 +106,7 @@ export class ProductEditComponent implements OnInit, AfterViewInit {
 
         // Replace the existing tags AbstractControl
         this.productForm.setControl('tags', this.fb.array(this.product.tags || []));
+
+        this.productDataErr = '';
     }
 }
