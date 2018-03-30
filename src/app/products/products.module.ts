@@ -12,12 +12,25 @@ import { ProductDetailGuardService } from './services/product-detail-guard.servi
 import { ProductEditComponent } from './product-edit/product-edit.component';
 import { ProductData } from './services/product.db';
 import { ProductEditDeactivateService } from './services/product-edit-deactivate.service';
+import { AuthGruard } from './../userLogIn/service/auth-guard.service';
 
 const ROUTES: Array<object> = [
-    {path: 'products', component: ProductListComponent},
-    {path: 'addproduct/:id', canActivate: [ProductDetailGuardService],
-            canDeactivate: [ProductEditDeactivateService], component: ProductEditComponent},
-    {path: 'products/:id', canActivate: [ProductDetailGuardService], component: ProductDetailComponent}
+    {
+        path: 'products',
+        canActivate: [AuthGruard],
+        component: ProductListComponent
+    },
+    {
+        path: 'addproduct/:id',
+        canActivate: [AuthGruard, ProductDetailGuardService],
+        canDeactivate: [ProductEditDeactivateService],
+        component: ProductEditComponent
+    },
+    {
+        path: 'products/:id',
+        canActivate: [AuthGruard, ProductDetailGuardService],
+        component: ProductDetailComponent
+    }
 ];
 
 @NgModule({
