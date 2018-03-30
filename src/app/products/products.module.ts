@@ -1,4 +1,3 @@
-import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
@@ -26,7 +25,6 @@ const ROUTES: Array<object> = [
         HttpClientModule,
         SharedModule,
         AngularMaterilModule,
-        ReactiveFormsModule,
         InMemoryWebApiModule.forRoot(ProductData, {delay: 1000}),
         RouterModule.forChild(ROUTES)
     ],

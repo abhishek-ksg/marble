@@ -19,7 +19,8 @@ import { StarComponent } from './star/star-component';
         ConvertToSpacesPipe,
         StarComponent,
         CommonModule,
-        FormsModule
+        FormsModule,
+        ReactiveFormsModule
     ]
 })
 export class SharedModule {
