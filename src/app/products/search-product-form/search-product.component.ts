@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { FormGroup, FormControlName, FormBuilder, Validators } from '@angular/forms';
 import { Component, ViewChildren, ElementRef, OnInit, AfterViewInit } from '@angular/core';
@@ -17,7 +18,9 @@ export class SearchProductComponent implements OnInit, AfterViewInit {
     private custmerFormErrMsgs: {[key: string]: {[key: string]: string}};
     private genericValidator: GenericValidator;
 
-    constructor(public fb: FormBuilder, private validationService: SearchProductValidationService) {
+    constructor(public fb: FormBuilder,
+                private validationService: SearchProductValidationService,
+                private router: Router) {
 
         this.custmerFormErrMsgs = this.validationService.searchProductFormErrMsgs;
         this.genericValidator = new GenericValidator(this.custmerFormErrMsgs);
@@ -43,6 +46,15 @@ export class SearchProductComponent implements OnInit, AfterViewInit {
     }
 
     submitSearchForm(): void {
-        alert(`Hola! Searching the product`);
+        const productName: string = this.searchForm.get('productName').value;
+        const productCode: string = this.searchForm.get('productCode').value;
+        const productTag: string = this.searchForm.get('productTag').value;
+
+        this.router.navigate(['/products', {
+                                                'productName': productName,
+                                                'productCode': productCode,
+                                                'productTag': productTag
+                                            }
+                            ]);
     }
 }
