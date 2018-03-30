@@ -10,9 +10,15 @@
       <li><a [routerLink]="['/employeeForm']">Employee Form</a></li>
       <li><a [routerLink]="['/addproduct', '0']">Add Product</a></li>
     </ul>
-    <ul class="nav navbar-nav navbar-right">
+    <ul class="nav navbar-nav navbar-right"
+        *ngIf="!authService.isLoggedIn()">
       <li><a [routerLink]="['/customer']"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
       <li><a [routerLink]="['/login']"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right"
+        *ngIf="authService.isLoggedIn()">
+      <li><a [routerLink]="['/userProfile']"><span class="glyphicon glyphicon-user"></span> Welcome {{authService.currentUser.userName}}</a></li>
+      <li><a (click)="logOutUser()"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
     </ul>
   </div>
   <router-outlet></router-outlet>
