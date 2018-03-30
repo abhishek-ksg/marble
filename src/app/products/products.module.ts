@@ -21,7 +21,7 @@ const ROUTES: Array<object> = [
         component: ProductListComponent
     },
     {
-        path: 'addproduct/:id',
+        path: 'products/:id/edit',
         canActivate: [AuthGruard, ProductDetailGuardService],
         canDeactivate: [ProductEditDeactivateService],
         component: ProductEditComponent
