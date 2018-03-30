@@ -10,6 +10,7 @@ import { ProdusctsModule } from './products/products.module';
 import { EmployeeFormModule } from './employeeForm/employee-form.module';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { CustomerModule } from './customerSignUp/customer.module';
+import { UserLoginModule } from './userLogIn/user-login.module';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { CustomerModule } from './customerSignUp/customer.module';
     ProdusctsModule,
     EmployeeFormModule,
     CustomerModule,
+    UserLoginModule,
     AppRouteModule
   ],
   providers: [],
