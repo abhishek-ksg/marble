@@ -9,9 +9,6 @@ export class LogInValidationService {
         },
         'passWord': {
             'required': 'Please enter the Password',
-        },
-        'invalidLogin': {
-            'misMatch': 'Invalid User Name OR Password'
         }
     };
 }

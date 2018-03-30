@@ -1,9 +1,11 @@
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { FormGroup, FormControlName, FormBuilder, Validators } from '@angular/forms';
 import { Component, ViewChildren, ElementRef, OnInit, AfterViewInit } from '@angular/core';
 
 import { GenericValidator } from './../../shared/validators/generic.validator';
 import { LogInValidationService } from './../service/logIn-validation.service';
+import { AuthService } from '../service/auth.service';
 
 @Component({
     templateUrl: './user-login.component.html',
@@ -14,12 +16,14 @@ export class UserLoginComponent implements OnInit, AfterViewInit {
 
     public logInForm: FormGroup;
     public errMsg: {[key: string]: string} = {};
+    public errorMessage: string;
 
     @ViewChildren(FormControlName, { read: ElementRef }) formInputElements: ElementRef[];
     private custmerFormErrMsgs: {[key: string]: {[key: string]: string}};
     private genericValidator: GenericValidator;
 
-    constructor(public fb: FormBuilder, private validationService: LogInValidationService) {
+    constructor(public fb: FormBuilder, private validationService: LogInValidationService,
+                private authService: AuthService, private router: Router) {
 
         this.custmerFormErrMsgs = this.validationService.loginFormErrMsgs;
         this.genericValidator = new GenericValidator(this.custmerFormErrMsgs);
@@ -44,7 +48,20 @@ export class UserLoginComponent implements OnInit, AfterViewInit {
     }
 
     submitLoginForm() {
-        alert('Hola! Submiting the login Form');
+        if (this.logInForm && this.logInForm.valid) {
+            const userName = this.logInForm.get('userName').value;
+            const passWord = this.logInForm.get('passWord').value;
+
+            this.authService.logInUser(userName, passWord);
+
+            if (this.authService.redirectUrl) {
+                this.router.navigateByUrl(this.authService.redirectUrl);
+            } else {
+                this.router.navigate(['/products']);
+            }
+        } else {
+            this.errorMessage = 'Invalid User Name and Password';
+        }
     }
 
 

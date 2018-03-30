@@ -3,6 +3,7 @@ import { RouterModule } from '@angular/router';
 
 import { UserLoginComponent } from './userLoginComponent/user-login.component';
 import { SharedModule } from './../shared/shared.module';
+import { AuthService } from './service/auth.service';
 
 
 const ROUTES: Array<object> = [{path: 'login', component: UserLoginComponent}];
@@ -15,7 +16,9 @@ const ROUTES: Array<object> = [{path: 'login', component: UserLoginComponent}];
     declarations: [
         UserLoginComponent
     ],
-    providers: []
+    providers: [
+        AuthService
+    ]
 })
 export class UserLoginModule {
 
