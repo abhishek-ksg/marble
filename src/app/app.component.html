@@ -9,6 +9,7 @@
       <li><a [routerLink]="['/products']">Products</a></li>
       <li><a [routerLink]="['/employeeForm']">Employee Form</a></li>
       <li><a [routerLink]="['/products', '0', 'edit']">Add Product</a></li>
+      <li><a [routerLink]="['/products/search']">Search Product</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right"
         *ngIf="!authService.isLoggedIn()">

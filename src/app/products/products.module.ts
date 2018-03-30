@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 
@@ -13,12 +13,19 @@ import { ProductEditComponent } from './product-edit/product-edit.component';
 import { ProductData } from './services/product.db';
 import { ProductEditDeactivateService } from './services/product-edit-deactivate.service';
 import { AuthGruard } from './../userLogIn/service/auth-guard.service';
+import { SearchProductValidationService } from './services/search-product-validation.service';
+import { SearchProductComponent } from './search-product-form/search-product.component';
 
 const ROUTES: Array<object> = [
     {
         path: 'products',
         canActivate: [AuthGruard],
         component: ProductListComponent
+    },
+    {
+        path: 'products/search',
+        canActivate: [AuthGruard],
+        component: SearchProductComponent
     },
     {
         path: 'products/:id/edit',
@@ -44,12 +51,14 @@ const ROUTES: Array<object> = [
     declarations: [
         ProductListComponent,
         ProductDetailComponent,
-        ProductEditComponent
+        ProductEditComponent,
+        SearchProductComponent
     ],
     providers: [
         ProductService,
         ProductDetailGuardService,
-        ProductEditDeactivateService
+        ProductEditDeactivateService,
+        SearchProductValidationService
     ]
 
 })

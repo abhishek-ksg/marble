@@ -1,0 +1,86 @@
+<div class="container-fluid">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            Search Product
+        </div>
+        <div class="panel-body">
+            <form class="form-horizontal"
+                  novalidate
+                  autocomplete="off"
+                  [formGroup]=searchForm
+                  (submit)="submitSearchForm()">
+                <fieldset>
+                    <div class="form-group"
+                         [class.has-error]="errMsg.productName">
+                        <label for="productNameId"
+                               class="control-label col-md-2">
+                            Product Name
+                        </label>
+                        <div class="col-md-8">
+                            <input type="text"
+                                   class="form-control"
+                                   id="productNameId"
+                                   formControlName="productName">
+                            <div class="help-block"
+                                 *ngIf="errMsg.productName">
+                                {{errMsg.productName}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group"
+                         [class.has-error]="errMsg.productCode">
+                        <label for="productCodeId"
+                               class="control-label col-md-2">
+                            Product Code
+                        </label>
+                        <div class="col-md-8">
+                            <input type="text"
+                                   class="form-control"
+                                   id="productCodeId"
+                                   formControlName="productCode">
+                            <div class="help-block"
+                                 *ngIf="errMsg.productCode">
+                                {{errMsg.productCode}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group"
+                         [class.has-error]="errMsg.productTag">
+                        <label for="productTagId"
+                               class="control-label col-md-2">
+                            Product Category
+                        </label>
+                        <div class="col-md-8">
+                            <input type="text"
+                                   class="form-control"
+                                   id="productTagId"
+                                   formControlName="productTag">
+                            <div class="help-block"
+                                 *ngIf="errMsg.productTag">
+                                {{errMsg.productTag}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-4 col-md-offset-2">
+                            <span>
+                                <button class="btn btn-primary"
+                                        type="submit"
+                                        [disabled]="!searchForm.valid">Search
+                                </button>
+                            </span>
+                            <span>
+                                <button class="btn btn-default"
+                                        type="button"
+                                        [routerLink]="['/products']">
+                                    cancel
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                </fieldset>
+
+            </form>
+        </div>
+    </div>
+</div>
