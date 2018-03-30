@@ -14,19 +14,21 @@ import { ProductEditComponent } from './product-edit/product-edit.component';
 import { ProductData } from './services/product.db';
 import { ProductEditDeactivateService } from './services/product-edit-deactivate.service';
 
+const ROUTES: Array<object> = [
+    {path: 'products', component: ProductListComponent},
+    {path: 'addproduct/:id', canActivate: [ProductDetailGuardService],
+            canDeactivate: [ProductEditDeactivateService], component: ProductEditComponent},
+    {path: 'products/:id', canActivate: [ProductDetailGuardService], component: ProductDetailComponent}
+];
+
 @NgModule({
     imports: [
         HttpClientModule,
         SharedModule,
         AngularMaterilModule,
         ReactiveFormsModule,
-        InMemoryWebApiModule.forRoot(ProductData),
-        RouterModule.forChild([
-            {path: 'products', component: ProductListComponent},
-            {path: 'addproduct/:id', canActivate: [ProductDetailGuardService],
-                    canDeactivate: [ProductEditDeactivateService], component: ProductEditComponent},
-            {path: 'products/:id', canActivate: [ProductDetailGuardService], component: ProductDetailComponent}
-        ])
+        InMemoryWebApiModule.forRoot(ProductData, {delay: 1000}),
+        RouterModule.forChild(ROUTES)
     ],
     declarations: [
         ProductListComponent,

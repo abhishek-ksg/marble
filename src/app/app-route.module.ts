@@ -4,16 +4,17 @@ import { RouterModule } from '@angular/router';
 import { SharedModule } from './shared/shared.module';
 import { WelcomeComponent } from './welcome/welcome.component';
 
+const ROUTES: Array<object> = [
+    {path: 'welcome', component: WelcomeComponent},
+    {path: '', redirectTo: 'welcome', pathMatch: 'full'},
+    {path: '**', redirectTo: 'welcome', pathMatch: 'full'}
+];
 
 @NgModule({
 
     imports: [
         SharedModule,
-        RouterModule.forRoot([
-            {path: 'welcome', component: WelcomeComponent},
-            {path: '', redirectTo: 'welcome', pathMatch: 'full'},
-            {path: '**', redirectTo: 'welcome', pathMatch: 'full'}
-        ])
+        RouterModule.forRoot(ROUTES)
     ],
     exports: [
         RouterModule
