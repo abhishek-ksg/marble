@@ -110,7 +110,8 @@ export class ProductService {
             tags: [],
             price: null,
             starRating: null,
-            imageUrl: null
+            imageUrl: null,
+            category: null
         };
     }
 

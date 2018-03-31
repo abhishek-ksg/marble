@@ -8,4 +8,5 @@ export interface IProduct {
     price: number;
     starRating: number;
     imageUrl: string;
+    category: string;
 }
