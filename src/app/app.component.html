@@ -5,21 +5,21 @@
     </div>
     <ul class="nav navbar-nav">
 
-      <li><a [routerLink]="['/welcome']">Welcome</a></li>
-      <li><a [routerLink]="['/products']">Products</a></li>
-      <li><a [routerLink]="['/employeeForm']">Employee Form</a></li>
-      <li><a [routerLink]="['/products', '0', 'edit']">Add Product</a></li>
-      <li><a [routerLink]="['/products/search']">Search Product</a></li>
+      <li routerLinkActive="active"><a [routerLink]="['/welcome']">Welcome</a></li>
+      <li routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"><a [routerLink]="['/products']">Products</a></li>
+      <li routerLinkActive="active"><a [routerLink]="['/employeeForm']">Employee Form</a></li>
+      <li routerLinkActive="active"><a [routerLink]="['/products', '0', 'edit']">Add Product</a></li>
+      <li routerLinkActive="active"><a [routerLink]="['/products/search']">Search Product</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right"
         *ngIf="!authService.isLoggedIn()">
-      <li><a [routerLink]="['/customer']"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-      <li><a [routerLink]="['/login']"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      <li routerLinkActive="active"><a [routerLink]="['/customer']"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <li routerLinkActive="active"><a [routerLink]="['/login']"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right"
         *ngIf="authService.isLoggedIn()">
-      <li><a [routerLink]="['/userProfile']"><span class="glyphicon glyphicon-user"></span> Welcome {{authService.currentUser.userName}}</a></li>
-      <li><a (click)="logOutUser()"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
+      <li routerLinkActive="active"><a [routerLink]="['/userProfile']"><span class="glyphicon glyphicon-user"></span> Welcome {{authService.currentUser.userName}}</a></li>
+      <li routerLinkActive="active"><a (click)="logOutUser()"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
     </ul>
   </div>
   <router-outlet></router-outlet>
