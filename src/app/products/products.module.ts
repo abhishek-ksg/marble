@@ -17,6 +17,9 @@ import { SearchProductValidationService } from './services/search-product-valida
 import { SearchProductComponent } from './search-product-form/search-product.component';
 import { ProductDataResolver } from './services/product-data-resolver.service';
 import { AllProductsDataResolver } from './services/all-product-data-resolver.service';
+import { ProductEditTagsComponent } from './product-edit/product-edit-tags/product-edit-tags.component';
+import { ProductEditInfoComponent } from './product-edit/product-edit-info/product-edit-info.component.';
+import { ProductEditParentComponent } from './product-edit/product-edit-parent/product-edit-parent.component';
 
 const ROUTES: Array<object> = [
     {
@@ -34,8 +37,13 @@ const ROUTES: Array<object> = [
         path: 'products/:id/edit',
         canActivate: [AuthGruard, ProductDetailGuardService],
         canDeactivate: [ProductEditDeactivateService],
-        component: ProductEditComponent,
-        resolve: {product: ProductDataResolver}
+        component: ProductEditParentComponent,
+        resolve: {product: ProductDataResolver},
+        children: [
+            {path: '', redirectTo: 'info', pathMatch: 'full'},
+            {path: 'info', component: ProductEditInfoComponent},
+            {path: 'tags', component: ProductEditTagsComponent}
+        ]
     },
     {
         path: 'products/:id',
@@ -57,7 +65,10 @@ const ROUTES: Array<object> = [
         ProductListComponent,
         ProductDetailComponent,
         ProductEditComponent,
-        SearchProductComponent
+        SearchProductComponent,
+        ProductEditParentComponent,
+        ProductEditInfoComponent,
+        ProductEditTagsComponent
     ],
     providers: [
         ProductService,

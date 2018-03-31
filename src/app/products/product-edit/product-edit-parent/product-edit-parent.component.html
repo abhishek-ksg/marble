@@ -1,0 +1,19 @@
+<div class="container-fluid">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            {{pageTitle}}
+        </div>
+
+        <div class="panel-body">
+            <div class="wizard">
+                <a [routerLink]="['info']">
+                    Basic Information
+                </a>
+                <a [routerLink]="['tags']">
+                    Search Tags
+                </a>
+            </div>
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>
