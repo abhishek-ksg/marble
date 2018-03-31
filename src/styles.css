@@ -32,8 +32,8 @@ li {
   }
 }*/
 
-/* Slide transition */
-pm-app div.panel.panel-primary {
+/* Slide transition I didnt try any of these 2 animation/transition */
+am-root div.panel.panel-primary {
     animation-duration: .5s;
     animation-name: slideIn;
     animation-fill-mode: forwards;
