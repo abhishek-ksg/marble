@@ -1,3 +1,73 @@
 <div class="panel-body">
-    INFO goes here
+    <form class="form-horizontal"
+          novalidate
+          [formGroup]="productInfoForm">
+        <fieldset>
+            <div class="form-group"
+                 [class.has-error]="errMsg.productName">
+                <label for="productNameId"
+                       class="col-md-2 control-label">
+                    Product Name
+                </label>
+                <div class="col-md-8">
+                    <input type="text"
+                           class="form-control"
+                           id="productNameId"
+                           formControlName="productName" />
+                    <span class="help-block" *ngIf="errMsg.productName">
+                        {{errMsg.productName}}
+                    </span>
+                </div>
+            </div>
+            <div class="form-group"
+                 [class.has-error]="errMsg.productCode">
+                <label for="productCodeId"
+                       class="col-md-2 control-label">
+                    Product Code
+                </label>
+                <div class="col-md-8">
+                    <input type="text"
+                           class="form-control"
+                           id="productCodeId"
+                           formControlName="productCode" />
+                    <span class="help-block"
+                          *ngIf="errMsg.productCode">
+                        {{errMsg.productCode}}
+                    </span>
+                </div>
+            </div>
+            <div class="form-group"
+                 [class.has-error]="errMsg.starRating">
+                <label for="productRatingId"
+                       class="col-md-2 control-label">
+                    Star Rating (1-5)
+                </label>
+                <div class="col-md-8">
+                    <input type="text"
+                           class="form-control"
+                           id="productRatingId"
+                           formControlName="starRating" />
+                    <span class="help-block"
+                          *ngIf="errMsg.starRating">
+                        {{errMsg.starRating}}
+                    </span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="productDescId"
+                       class="col-md-2 control-label">
+                    Description
+                </label>
+                <div class="col-md-8">
+                    <textarea type="text"
+                              class="form-control"
+                              id="productDescId"
+                              rows="3"
+                              formControlName="description">
+                  </textarea>
+                </div>
+            </div>
+        </fieldset>
+    </form>
 </div>

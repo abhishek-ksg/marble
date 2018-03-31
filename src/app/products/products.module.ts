@@ -9,7 +9,6 @@ import { SharedModule } from '../shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { ProductDetailGuardService } from './services/product-detail-guard.service';
-import { ProductEditComponent } from './product-edit/product-edit.component';
 import { ProductData } from './services/product.db';
 import { ProductEditDeactivateService } from './services/product-edit-deactivate.service';
 import { AuthGruard } from './../userLogIn/service/auth-guard.service';
@@ -64,7 +63,6 @@ const ROUTES: Array<object> = [
     declarations: [
         ProductListComponent,
         ProductDetailComponent,
-        ProductEditComponent,
         SearchProductComponent,
         ProductEditParentComponent,
         ProductEditInfoComponent,
