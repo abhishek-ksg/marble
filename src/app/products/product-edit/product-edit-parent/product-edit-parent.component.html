@@ -7,10 +7,12 @@
         <div class="panel-body">
             <div class="wizard">
                 <a [routerLink]="['info']">
-                    Basic Information
+                    Basic Information <span [ngClass]="{'glyphicon glyphicon-exclamation-sign':
+                                            !isValid('info')}"></span>
                 </a>
                 <a [routerLink]="['tags']">
-                    Search Tags
+                    Search Tags <span [ngClass]="{'glyphicon glyphicon-exclamation-sign':
+                                !isValid('tags')}"></span>
                 </a>
             </div>
             <router-outlet></router-outlet>

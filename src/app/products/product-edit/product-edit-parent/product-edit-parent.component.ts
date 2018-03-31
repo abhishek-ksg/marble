@@ -1,11 +1,10 @@
-import { IProduct } from './../../models/product.interface';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import { NumberValidators } from './../../../shared/validators/number.validators';
 import { Component, OnInit, AfterViewInit, ElementRef, ViewChildren } from '@angular/core';
-import { GenericValidator } from '../../../shared/validators/generic.validator';
-import { Subscription } from 'rxjs/Subscription';
 
+import { NumberValidators } from './../../../shared/validators/number.validators';
+import { GenericValidator } from '../../../shared/validators/generic.validator';
+import { IProduct } from './../../models/product.interface';
 import { ProductService } from './../../services/product.service';
 
 @Component({
@@ -19,10 +18,15 @@ export class ProductEditParentComponent implements OnInit {
 
     private currentProduct: IProduct;
     private originalProduct: IProduct;
+    private dataIsValid: { [key: string]: boolean } = {};
 
     constructor(private route: ActivatedRoute,
                 private router: Router,
                 private productService: ProductService) {
+    }
+
+    get isDirty(): boolean {
+        return (JSON.stringify(this.currentProduct) !== JSON.stringify(this.originalProduct));
     }
 
     get product(): IProduct {
@@ -41,17 +45,16 @@ export class ProductEditParentComponent implements OnInit {
         });
     }
 
-    saveProduct() {
-        // if (this.productForm.dirty && this.productForm.valid) {
-        //     const newProduct = Object.assign({}, this.product, this.productForm.value);
-        //     this.productService.saveProduct(newProduct)
-        //         .subscribe(
-        //             (product: IProduct) => this.onSaveComplete(),
-        //             (err) => this.productDataErr = <any>err
-        //         );
-        // } else if (!this.productForm.dirty) {
-        //     this.onSaveComplete();
-        // }
+    submitEditForm() {
+        if (this.isDirty) {
+            this.productService.saveProduct(this.product)
+                .subscribe(
+                    (product: IProduct) => this.onSaveComplete(),
+                    (err) => this.productDataErr = <any>err
+                );
+        } else if (!this.isDirty) {
+            this.onSaveComplete();
+        }
     }
 
     deleteProduct() {
@@ -69,14 +72,23 @@ export class ProductEditParentComponent implements OnInit {
         }
     }
 
-    private onSaveComplete(): void {
+    cancelProductEdit(): void {
         this.router.navigate(['/products'], {queryParamsHandling: 'preserve'});
     }
 
-    private getProductData(productId: number): void {
-        this.productService.getProductData(productId)
-            .subscribe( (product: IProduct) => this.onProductDataReceived(product),
-                        ( error: any ) => this.productDataErr = <any>error);
+    isValid(path: string): boolean {
+        this.validate();
+        if (path) {
+            return this.dataIsValid[path];
+        }
+        return (this.dataIsValid &&
+            Object.keys(this.dataIsValid).every(d => this.dataIsValid[d] === true));
+    }
+
+    private onSaveComplete(): void {
+        this.product = null;
+        this.originalProduct = null;
+        this.router.navigate(['/products'], {queryParamsHandling: 'preserve'});
     }
 
     private onProductDataReceived(product: IProduct): void {
@@ -91,7 +103,25 @@ export class ProductEditParentComponent implements OnInit {
         this.productDataErr = '';
     }
 
-    cancelProductEdit(): void {
-        this.router.navigate(['/products'], {queryParamsHandling: 'preserve'});
+    private validate(): void {
+        // Clear the validation object
+        this.dataIsValid = {};
+
+        // 'info' tab
+        if (this.product.productName &&
+            this.product.productName.length >= 3 &&
+            this.product.productCode) {
+            this.dataIsValid['info'] = true;
+        } else {
+            this.dataIsValid['info'] = false;
+        }
+
+        // 'tags' tab
+        if (this.product.category &&
+            this.product.category.length >= 3) {
+            this.dataIsValid['tags'] = true;
+        } else {
+            this.dataIsValid['tags'] = false;
+        }
     }
 }

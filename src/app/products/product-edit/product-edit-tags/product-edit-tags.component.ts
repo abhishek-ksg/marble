@@ -1,9 +1,10 @@
 import { Observable } from 'rxjs/Observable';
 import { ActivatedRoute, Router } from '@angular/router';
-import { GenericValidator } from './../../../shared/validators/generic.validator';
-import { IProduct } from './../../models/product.interface';
 import { FormGroup, FormControlName, FormBuilder, FormArray, Validators, FormControl } from '@angular/forms';
 import { Component, ViewChildren, ElementRef, OnInit, AfterViewInit } from '@angular/core';
+
+import { GenericValidator } from './../../../shared/validators/generic.validator';
+import { IProduct } from './../../models/product.interface';
 
 @Component({
     templateUrl: './product-edit-tags.component.html'
