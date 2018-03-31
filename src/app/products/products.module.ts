@@ -16,12 +16,14 @@ import { AuthGruard } from './../userLogIn/service/auth-guard.service';
 import { SearchProductValidationService } from './services/search-product-validation.service';
 import { SearchProductComponent } from './search-product-form/search-product.component';
 import { ProductDataResolver } from './services/product-data-resolver.service';
+import { AllProductsDataResolver } from './services/all-product-data-resolver.service';
 
 const ROUTES: Array<object> = [
     {
         path: 'products',
         canActivate: [AuthGruard],
-        component: ProductListComponent
+        component: ProductListComponent,
+        resolve: {products: AllProductsDataResolver}
     },
     {
         path: 'products/search',
@@ -62,7 +64,8 @@ const ROUTES: Array<object> = [
         ProductDetailGuardService,
         ProductEditDeactivateService,
         SearchProductValidationService,
-        ProductDataResolver
+        ProductDataResolver,
+        AllProductsDataResolver
     ]
 
 })
