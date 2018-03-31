@@ -15,5 +15,33 @@
             </div>
             <router-outlet></router-outlet>
         </div>
+
+        <div class="panel-footer">
+            <div class="row">
+                <div class="col-md-4 col-md-offset-2">
+                    <span>
+                        <button class="btn btn-primary"
+                                (click)="submitEditForm()"
+                                [disabled]="!isValid()">
+                            Save
+                        </button>
+                    </span>
+                    <span>
+                        <button class="btn btn-warning"
+                                type="button"
+                                (click)="cancelProductEdit()">
+                            Cancel
+                        </button>
+                    </span>
+                    <span>
+                        <button class="btn btn-danger"
+                                type="button"
+                                (click)="deleteProduct()">
+                            Delete
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
