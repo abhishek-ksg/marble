@@ -15,6 +15,7 @@ import { ProductEditDeactivateService } from './services/product-edit-deactivate
 import { AuthGruard } from './../userLogIn/service/auth-guard.service';
 import { SearchProductValidationService } from './services/search-product-validation.service';
 import { SearchProductComponent } from './search-product-form/search-product.component';
+import { ProductDataResolver } from './services/product-data-resolver.service';
 
 const ROUTES: Array<object> = [
     {
@@ -31,12 +32,14 @@ const ROUTES: Array<object> = [
         path: 'products/:id/edit',
         canActivate: [AuthGruard, ProductDetailGuardService],
         canDeactivate: [ProductEditDeactivateService],
-        component: ProductEditComponent
+        component: ProductEditComponent,
+        resolve: {product: ProductDataResolver}
     },
     {
         path: 'products/:id',
         canActivate: [AuthGruard, ProductDetailGuardService],
-        component: ProductDetailComponent
+        component: ProductDetailComponent,
+        resolve: {product: ProductDataResolver}
     }
 ];
 
@@ -58,7 +61,8 @@ const ROUTES: Array<object> = [
         ProductService,
         ProductDetailGuardService,
         ProductEditDeactivateService,
-        SearchProductValidationService
+        SearchProductValidationService,
+        ProductDataResolver
     ]
 
 })

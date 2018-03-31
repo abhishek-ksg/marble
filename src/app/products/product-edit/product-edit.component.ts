@@ -65,9 +65,8 @@ export class ProductEditComponent implements OnInit, AfterViewInit {
             description: ''
         });
 
-        this.sub = this.route.paramMap.subscribe( (params: ParamMap) => {
-            const productId = +params.get('id');
-            this.getProductData(productId);
+        this.route.data.subscribe( (data) => {
+            this.onProductDataReceived(data['product']);
         });
     }
 
