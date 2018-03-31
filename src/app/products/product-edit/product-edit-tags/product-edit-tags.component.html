@@ -21,79 +21,81 @@
                 </div>
             </div>
 
-            <div class="form-group">
-                    <div class="col-md-4 col-md-offset-2">
-                        <button class="btn btn-primary"
-                            type="button"
-                            [disabled]="tags.invalid"
-                            (click)="addNewTag()">
-                            Add Tag
-                        </button>
-                    </div>
+
+
+            <div class="form-group"
+                    [class.has-error]="errMsg.newTags">
+
+                <label class="col-md-2 control-label"
+                        for="tagsId">
+                    Search Tags
+                </label>
+
+                <div class="col-md-7">
+                    <input class="form-control"
+                        id="tagsId"
+                        type="text"
+                        placeholder="Search keywords separated by commas"
+                        formControlName="newTags" />
+                    <span class="help-block" *ngIf="errMsg.newTags">
+                        {{errMsg.newTags}}
+                    </span>
                 </div>
+                <div class="col-md-1">
+                    <button type="button"
+                            class="btn btn-success"
+                            (click)="addNewTags()">
+                        Add
+                    </button>
+                </div>
+            </div>
 
-                <div class="form-group"
-                        [class.has-error]="errMsg.newTags">
+            <div class="form-group">
+                <div class="row col-md-8 col-md-offset-2">
+                    <span *ngFor="let tag of tags.controls; let i = index">
+                        <button class="btn btn-default"
+                                style="font-size:smaller;margin-bottom:12px"
+                                (click)="deleteTag(i)">
+                            {{tag.value}}
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </button>
+                    </span>
+                </div>
+            </div>
 
-                    <label class="col-md-2 control-label"
-                            for="tagsId">
-                        Search Tags
+
+            <div class="form-group">
+                <div class="col-md-4 col-md-offset-2">
+                    <button class="btn btn-primary"
+                        type="button"
+                        [disabled]="tags.invalid"
+                        (click)="addNewTag()">
+                    Add Tag
+                    </button>
+                </div>
+            </div>
+            <div formArrayName="tags"
+                *ngFor="let tag of tags.controls; let i=index">
+                <div class="form-group">
+                    <label [attr.for]="i"
+                        class="col-md-2 control-label">
+                    Tag
                     </label>
-
-                    <div class="col-md-8">
-                        <input class="form-control"
-                            id="tagsId"
-                            type="text"
-                            placeholder="Search keywords separated by commas"
-                            formControlName="newTags" />
-                        <span class="help-block" *ngIf="errMsg.newTags">
-                            {{errMsg.newTags}}
-                        </span>
+                    <div class="col-md-7">
+                        <input type="text"
+                            class="form-control"
+                            [id]="i"
+                            [formControlName]="i"/>
                     </div>
                     <div class="col-md-1">
-                        <button type="button"
-                                class="btn btn-default"
-                                (click)="addNewTags()">
-                            Add
+                        <button class="btn btn-danger"
+                            (click)="deleteTag(i)"
+                            type="button">
+                        Delete
                         </button>
                     </div>
                 </div>
-                <div class="form-group">
-                    <div class="row col-md-8 col-md-offset-2">
-                        <span *ngFor="let tag of tags.controls; let i = index">
-                            <button class="btn btn-default"
-                                    style="font-size:smaller;margin-bottom:12px"
-                                    (click)="deleteTag(i)">
-                                {{tag.value}}
-                                <span class="glyphicon glyphicon-remove"></span>
-                            </button>
-                        </span>
-                    </div>
-                </div>
-
-
-                <div formArrayName="tags"
-                     *ngFor="let tag of tags.controls; let i=index">
-                    <div class="form-group">
-                        <label [attr.for]="i"
-                            class="col-md-2 control-label">
-                            Tag
-                        </label>
-                        <div class="col-md-7">
-                            <input type="text"
-                                class="form-control"
-                                [id]="i"
-                                [formControlName]="i"/>
-                        </div>
-                        <div class="col-md-1">
-                            <button class="btn btn-danger"
-                                    (click)="deleteTag(i)"
-                                    type="button">
-                                Delete
-                            </button>
-                        </div>
-                    </div>
-                </div>
+            </div>
         </fieldset>
     </form>
 </div>
