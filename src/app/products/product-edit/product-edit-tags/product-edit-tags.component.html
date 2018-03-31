@@ -1,3 +1,59 @@
 <div class="panel-body">
-    TAGS goes here
+    <form class="form-horizontal"
+          novalidate
+          [formGroup]="productTagForm">
+        <fieldset>
+            <div class="form-group"
+                 [class.has-error]="errMsg.category">
+                <label for="categoryId"
+                       class="col-md-2 control-label">
+                    Product Category
+                </label>
+                <div class="col-md-8">
+                    <input type="text"
+                           class="form-control"
+                           id="categoryId"
+                           formControlName="category" />
+                    <span class="help-block"
+                          *ngIf="errMsg.category">
+                        {{errMsg.category}}
+                    </span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                    <div class="col-md-4 col-md-offset-2">
+                        <button class="btn btn-primary"
+                            type="button"
+                            [disabled]="tags.invalid"
+                            (click)="addNewTag()">
+                            Add Tag
+                        </button>
+                    </div>
+                </div>
+
+                <div formArrayName="tags"
+                     *ngFor="let tag of tags.controls; let i=index">
+                    <div class="form-group">
+                        <label [attr.for]="i"
+                            class="col-md-2 control-label">
+                            Tag
+                        </label>
+                        <div class="col-md-7">
+                            <input type="text"
+                                class="form-control"
+                                [id]="i"
+                                [formControlName]="i"/>
+                        </div>
+                        <div class="col-md-1">
+                            <button class="btn btn-danger full-width-button"
+                                    (click)="deleteTag(i)"
+                                    type="button">
+                                Delete
+                            </button>
+                        </div>
+                    </div>
+                </div>
+        </fieldset>
+    </form>
 </div>

@@ -1,11 +1,12 @@
 import { Observable } from 'rxjs/Observable';
-import { NumberValidators } from './../../../shared/validators/number.validators';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
-import { GenericValidator } from './../../../shared/validators/generic.validator';
-import { IProduct } from './../../models/product.interface';
 import { FormGroup, FormControlName, FormBuilder, Validators } from '@angular/forms';
 import { Component, ViewChildren, ElementRef, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
+
+import { NumberValidators } from './../../../shared/validators/number.validators';
+import { GenericValidator } from './../../../shared/validators/generic.validator';
+import { IProduct } from './../../models/product.interface';
 
 @Component({
     templateUrl: './product-edit-info.component.html'
