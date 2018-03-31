@@ -32,6 +32,46 @@
                     </div>
                 </div>
 
+                <div class="form-group"
+                        [class.has-error]="errMsg.newTags">
+
+                    <label class="col-md-2 control-label"
+                            for="tagsId">
+                        Search Tags
+                    </label>
+
+                    <div class="col-md-8">
+                        <input class="form-control"
+                            id="tagsId"
+                            type="text"
+                            placeholder="Search keywords separated by commas"
+                            formControlName="newTags" />
+                        <span class="help-block" *ngIf="errMsg.newTags">
+                            {{errMsg.newTags}}
+                        </span>
+                    </div>
+                    <div class="col-md-1">
+                        <button type="button"
+                                class="btn btn-default"
+                                (click)="addNewTags()">
+                            Add
+                        </button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row col-md-8 col-md-offset-2">
+                        <span *ngFor="let tag of tags.controls; let i = index">
+                            <button class="btn btn-default"
+                                    style="font-size:smaller;margin-bottom:12px"
+                                    (click)="deleteTag(i)">
+                                {{tag.value}}
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+
+
                 <div formArrayName="tags"
                      *ngFor="let tag of tags.controls; let i=index">
                     <div class="form-group">

@@ -38,6 +38,8 @@ export class ProductEditTagsComponent implements OnInit, AfterViewInit {
         this.productTagForm = this.fb.group({
             category: ['', [Validators.required,
                                 Validators.minLength(3)]],
+            newTags: ['', [Validators.required,
+                Validators.minLength(3)]],
             tags: this.fb.array([])
         });
 
@@ -60,6 +62,17 @@ export class ProductEditTagsComponent implements OnInit, AfterViewInit {
 
     addNewTag() {
         this.tags.push(new FormControl('', Validators.required));
+    }
+
+    // Add the defined tags
+    addNewTags(): void {
+        const tagArray = this.productTagForm.get('newTags').value.split(',');
+        for (let i = 0; i < tagArray.length; i++) {
+            this.tags.push(new FormControl(tagArray[i], Validators.required));
+        }
+        this.productTagForm.patchValue({
+            newTags: ''
+        });
     }
 
     deleteTag(i: number): void {
