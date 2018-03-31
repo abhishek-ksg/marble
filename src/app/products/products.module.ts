@@ -1,5 +1,4 @@
-import { ReactiveFormsModule } from '@angular/forms';
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 
@@ -13,12 +12,37 @@ import { ProductDetailGuardService } from './services/product-detail-guard.servi
 import { ProductEditComponent } from './product-edit/product-edit.component';
 import { ProductData } from './services/product.db';
 import { ProductEditDeactivateService } from './services/product-edit-deactivate.service';
+import { AuthGruard } from './../userLogIn/service/auth-guard.service';
+import { SearchProductValidationService } from './services/search-product-validation.service';
+import { SearchProductComponent } from './search-product-form/search-product.component';
+import { ProductDataResolver } from './services/product-data-resolver.service';
+import { AllProductsDataResolver } from './services/all-product-data-resolver.service';
 
 const ROUTES: Array<object> = [
-    {path: 'products', component: ProductListComponent},
-    {path: 'addproduct/:id', canActivate: [ProductDetailGuardService],
-            canDeactivate: [ProductEditDeactivateService], component: ProductEditComponent},
-    {path: 'products/:id', canActivate: [ProductDetailGuardService], component: ProductDetailComponent}
+    {
+        path: 'products',
+        canActivate: [AuthGruard],
+        component: ProductListComponent,
+        resolve: {products: AllProductsDataResolver}
+    },
+    {
+        path: 'products/search',
+        canActivate: [AuthGruard],
+        component: SearchProductComponent
+    },
+    {
+        path: 'products/:id/edit',
+        canActivate: [AuthGruard, ProductDetailGuardService],
+        canDeactivate: [ProductEditDeactivateService],
+        component: ProductEditComponent,
+        resolve: {product: ProductDataResolver}
+    },
+    {
+        path: 'products/:id',
+        canActivate: [AuthGruard, ProductDetailGuardService],
+        component: ProductDetailComponent,
+        resolve: {product: ProductDataResolver}
+    }
 ];
 
 @NgModule({
@@ -26,19 +50,22 @@ const ROUTES: Array<object> = [
         HttpClientModule,
         SharedModule,
         AngularMaterilModule,
-        ReactiveFormsModule,
         InMemoryWebApiModule.forRoot(ProductData, {delay: 1000}),
         RouterModule.forChild(ROUTES)
     ],
     declarations: [
         ProductListComponent,
         ProductDetailComponent,
-        ProductEditComponent
+        ProductEditComponent,
+        SearchProductComponent
     ],
     providers: [
         ProductService,
         ProductDetailGuardService,
-        ProductEditDeactivateService
+        ProductEditDeactivateService,
+        SearchProductValidationService,
+        ProductDataResolver,
+        AllProductsDataResolver
     ]
 
 })

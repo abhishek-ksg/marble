@@ -65,9 +65,8 @@ export class ProductEditComponent implements OnInit, AfterViewInit {
             description: ''
         });
 
-        this.sub = this.route.paramMap.subscribe( (params: ParamMap) => {
-            const productId = +params.get('id');
-            this.getProductData(productId);
+        this.route.data.subscribe( (data) => {
+            this.onProductDataReceived(data['product']);
         });
     }
 
@@ -123,7 +122,7 @@ export class ProductEditComponent implements OnInit, AfterViewInit {
 
     private onSaveComplete(): void {
         this.productForm.reset();
-        this.router.navigate(['/products']);
+        this.router.navigate(['/products'], {queryParamsHandling: 'preserve'});
     }
 
     private getProductData(productId: number): void {
@@ -156,5 +155,9 @@ export class ProductEditComponent implements OnInit, AfterViewInit {
         this.productForm.setControl('tags', this.fb.array(this.product.tags || []));
 
         this.productDataErr = '';
+    }
+
+    cancelProductEdit(): void {
+        this.router.navigate(['/products'], {queryParamsHandling: 'preserve'});
     }
 }

@@ -1,0 +1,83 @@
+<div class="container-fluid">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            Login
+        </div>
+
+        <div class="panel-body">
+            <form class="form-horizontal"
+                  novalidate
+                  autocomplete="off"
+                  [formGroup]="logInForm"
+                  (submit)="submitLoginForm()">
+                <fieldset>
+                    <div class="form-group"
+                         [class.has-error]="errMsg.userName">
+                        <label for="userNameId"
+                                class="col-md-2 control-label">
+                            User Name
+                        </label>
+                        <div class="col-md-8">
+                            <input type="text"
+                                   class="form-control"
+                                   id="userNameId"
+                                   formControlName="userName"
+                                   placeholder="Enter your user Name"
+                            />
+                            <div class="help-block"
+                                 *ngIf="errMsg.userName">
+                                {{errMsg.userName}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group"
+                         [class.has-error]="errMsg.passWord">
+                        <label for="passWordId"
+                                class="col-md-2 control-label">
+                            Password
+                        </label>
+                        <div class="col-md-8">
+                            <input type="password"
+                                   class="form-control"
+                                   id="passWordId"
+                                   formControlName="passWord"
+                                   placeholder="Enter your Password"
+                            />
+                            <div class="help-block"
+                                 *ngIf="errMsg.passWord">
+                                {{errMsg.passWord}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-4 col-md-offset-2">
+                            <span>
+                                <button class="btn btn-success"
+                                        type="submit"
+                                        [disabled]="!logInForm.valid">Log In
+                                </button>
+                            </span>
+                            <span>
+                                <button class="btn btn-primary"
+                                        type="button"
+                                        [routerLink]="['/welcome']">
+                                    Cancel
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group"
+                         [class.has-error]="errorMessage">
+                        <div class="col-md-8 col-md-offset-2">
+                            <div class="help-block"
+                                 *ngIf="errorMessage">
+                                {{errorMessage}}
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+
+            </form>
+        </div>
+    </div>
+</div>

@@ -7,6 +7,15 @@ import { SharedModule } from './../shared/shared.module';
 import { EmployeeFormComponent } from './employee-form.component';
 import { EmployeeFormService } from './employee-form.service';
 import { AngularMaterilModule } from '../angularmaterial/angularmaterial.module';
+import { AuthGruard } from './../userLogIn/service/auth-guard.service';
+
+const ROUTES: Array<object> = [
+    {
+        path: 'employeeForm',
+        canActivate: [AuthGruard],
+        component: EmployeeFormComponent
+    }
+];
 
 @NgModule({
     imports: [
@@ -14,9 +23,7 @@ import { AngularMaterilModule } from '../angularmaterial/angularmaterial.module'
         BsDropdownModule,
         HttpModule,
         AngularMaterilModule,
-        RouterModule.forChild([
-            {path: 'employeeForm', component: EmployeeFormComponent}
-        ])
+        RouterModule.forChild(ROUTES)
     ],
     declarations: [
         EmployeeFormComponent

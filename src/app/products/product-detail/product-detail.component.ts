@@ -21,15 +21,12 @@ export class ProductDetailComponent implements OnInit {
     }
 
     ngOnInit() {
-        this._route.paramMap.subscribe( (params) => {
-            this.productId = +params.get('id');
-
-            this.productService.getProductData(this.productId)
-                .subscribe( (product: IProduct) => {
-                    this.product = product;
-                    this.toggleNextPrev();
-                } );
+        this._route.data.subscribe( (data) => {
+            this.product = data['product'];
+            this.productId = this.product.id;
         });
+
+        this.toggleNextPrev();
 
         this.productService.getProductsId()
             .subscribe( (ids: number[]) => {
@@ -39,12 +36,16 @@ export class ProductDetailComponent implements OnInit {
     }
 
     onBack() {
-        this._router.navigate(['/products']);
+        this._router.navigate(['/products'], {queryParamsHandling: 'preserve'});
     }
 
     nextPrevProduct(next: boolean = true): void {
         this.productId = this.getNextPrevProductId(next);
-        this._router.navigate(['products', this.productId]);
+        this._router.navigate(['products', this.productId], {queryParamsHandling: 'preserve'});
+    }
+
+    editProduct(): void {
+        this._router.navigate(['/products', this.productId, 'edit'], {queryParamsHandling: 'preserve'});
     }
 
     private toggleNextPrev() {
