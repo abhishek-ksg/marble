@@ -39,12 +39,16 @@ export class ProductDetailComponent implements OnInit {
     }
 
     onBack() {
-        this._router.navigate(['/products']);
+        this._router.navigate(['/products'], {queryParamsHandling: 'preserve'});
     }
 
     nextPrevProduct(next: boolean = true): void {
         this.productId = this.getNextPrevProductId(next);
-        this._router.navigate(['products', this.productId]);
+        this._router.navigate(['products', this.productId], {queryParamsHandling: 'preserve'});
+    }
+
+    editProduct(): void {
+        this._router.navigate(['/products', this.productId, 'edit'], {queryParamsHandling: 'preserve'});
     }
 
     private toggleNextPrev() {

@@ -37,7 +37,8 @@
                         <tr *ngFor='let product of filteredProducts'>
                             <td><img [src]='product.imageUrl' [title]='product.productName'
                                 [style.width.px]='imageWidth' *ngIf='showImage'></td>
-                            <td><a [routerLink]="['/products', product.id]">{{product.productName}}</a></td>
+                            <td><a [routerLink]="['/products', product.id]"
+                                    [queryParams]="{filterText: filterText, showImage: showImage}">{{product.productName}}</a></td>
                             <td>{{product.productCode | lowercase | converttospaces:'-'}}</td>
                             <td>{{product.releaseDate}}</td>
                             <td>{{product.price | currency:USD:'symbol':'1.2-2'}}</td>
@@ -47,6 +48,7 @@
                                 <button class="btn btn-primary"
                                                type="button"
                                                [routerLink]="['/products', product.id, 'edit']"
+                                               [queryParams]="{filterText: filterText, showImage: showImage}"
                                                class="btn btn-primary full-width-button">
                                     Edit
                                 </button>

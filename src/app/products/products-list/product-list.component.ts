@@ -47,10 +47,12 @@ export class ProductListComponent implements OnInit {
         const productCode: string = this.route.snapshot.params['productCode'];
         const productTag: string = this.route.snapshot.params['productTag'];
 
+        this.showImage = this.route.snapshot.queryParams['showImage'] || false;
         this._productService.getProducts()
             .subscribe( (products: IProduct[]) => {
                 this.products = products;
                 this.filteredProducts = this.filterProductsForSearch(productName, productCode, productTag);
+                this.filterText = this.route.snapshot.queryParams['filterText'] || '';
             }, this.handleError );
     }
 

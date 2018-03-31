@@ -123,7 +123,7 @@ export class ProductEditComponent implements OnInit, AfterViewInit {
 
     private onSaveComplete(): void {
         this.productForm.reset();
-        this.router.navigate(['/products']);
+        this.router.navigate(['/products'], {queryParamsHandling: 'preserve'});
     }
 
     private getProductData(productId: number): void {
@@ -156,5 +156,9 @@ export class ProductEditComponent implements OnInit, AfterViewInit {
         this.productForm.setControl('tags', this.fb.array(this.product.tags || []));
 
         this.productDataErr = '';
+    }
+
+    cancelProductEdit(): void {
+        this.router.navigate(['/products'], {queryParamsHandling: 'preserve'});
     }
 }
