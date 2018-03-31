@@ -32,8 +32,8 @@ li {
   }
 }*/
 
-/* Slide transition */
-pm-app div.panel.panel-primary {
+/* Slide transition I didnt try any of these 2 animation/transition */
+am-root div.panel.panel-primary {
     animation-duration: .5s;
     animation-name: slideIn;
     animation-fill-mode: forwards;
@@ -50,36 +50,14 @@ pm-app div.panel.panel-primary {
   }
 }
 
-/* Spinner */
-.spinner {
-  font-size:300%;
-  position:absolute;
-  top: 50%;
-  left: 50%;
-  z-index:10
-}
-
-.glyphicon-spin {
-    -webkit-animation: spin 1000ms infinite linear;
-    animation: spin 1000ms infinite linear;
-}
-@-webkit-keyframes spin {
-    0% {
-        -webkit-transform: rotate(0deg);
-        transform: rotate(0deg);
-    }
-    100% {
-        -webkit-transform: rotate(359deg);
-        transform: rotate(359deg);
-    }
-}
-@keyframes spin {
-    0% {
-        -webkit-transform: rotate(0deg);
-        transform: rotate(0deg);
-    }
-    100% {
-        -webkit-transform: rotate(359deg);
-        transform: rotate(359deg);
-    }
+.spin-centered {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transform: -webkit-translate(-50%, -50%);
+    transform: -moz-translate(-50%, -50%);
+    transform: -ms-translate(-50%, -50%);
+    color:darkred;
+    z-index:1000
 }

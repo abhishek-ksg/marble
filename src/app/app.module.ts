@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
+import { AngularMaterialModule } from './angularmaterial/angularmaterial.module';
 import { AppRouteModule } from './app-route.module';
 import { AppComponent } from './app.component';
 import { ProdusctsModule } from './products/products.module';
@@ -25,6 +26,7 @@ import { UserLoginModule } from './userLogIn/user-login.module';
     ProdusctsModule,
     EmployeeFormModule,
     CustomerModule,
+    AngularMaterialModule,
     UserLoginModule,
     AppRouteModule
   ],

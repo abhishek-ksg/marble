@@ -2,7 +2,7 @@ import { NgModule, Component } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 
-import { AngularMaterilModule } from './../angularmaterial/angularmaterial.module';
+import { AngularMaterialModule } from './../angularmaterial/angularmaterial.module';
 import { ProductService } from './services/product.service';
 import { ProductListComponent } from './products-list/product-list.component';
 import { SharedModule } from '../shared/shared.module';
@@ -56,7 +56,7 @@ const ROUTES: Array<object> = [
     imports: [
         HttpClientModule,
         SharedModule,
-        AngularMaterilModule,
+        AngularMaterialModule,
         InMemoryWebApiModule.forRoot(ProductData, {delay: 1000}),
         RouterModule.forChild(ROUTES)
     ],

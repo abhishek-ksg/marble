@@ -15,6 +15,6 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
         MatProgressSpinnerModule
     ]
 })
-export class AngularMaterilModule {
+export class AngularMaterialModule {
 
 }
