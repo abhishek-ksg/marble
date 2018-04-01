@@ -14,11 +14,10 @@
             </div>
         </div>
         <div class="panel-body">
-            <ul>
-                <!-- <li *ngFor="let">
-
-                </li> -->
-            </ul>
+            <div *ngFor="let message of messageService.messages; let i=index">
+                <div *ngIf="i<10" class="message-row"></div>
+                    {{message}}
+            </div>
         </div>
     </div>
 </div>
