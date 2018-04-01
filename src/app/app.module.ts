@@ -12,7 +12,7 @@ import { EmployeeFormModule } from './employeeForm/employee-form.module';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { CustomerModule } from './customerSignUp/customer.module';
 import { UserLoginModule } from './userLogIn/user-login.module';
-
+import { MessageModule } from './messages/messages.module';
 
 @NgModule({
   declarations: [
@@ -28,6 +28,7 @@ import { UserLoginModule } from './userLogIn/user-login.module';
     CustomerModule,
     AngularMaterialModule,
     UserLoginModule,
+    MessageModule,
     AppRouteModule
   ],
   providers: [],

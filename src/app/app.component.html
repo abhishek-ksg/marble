@@ -26,5 +26,13 @@
       <li routerLinkActive="active"><a (click)="logOutUser()"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
     </ul>
   </div>
-  <router-outlet></router-outlet>
+
+  <div class="row">
+    <div class="col-md-10" style="padding-right: 0px">
+        <router-outlet></router-outlet>
+    </div>
+    <div class="col-md-2" style="padding-left: 0px">
+        <router-outlet name="popup"></router-outlet>
+    </div>
+  </div>
 </nav>
