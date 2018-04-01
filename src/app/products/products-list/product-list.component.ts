@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { IProduct } from '../models/product.interface';
 import { ProductService } from '../services/product.service';
+import { MessageService } from './../../messages/messageService/message.service';
+import { AuthService } from './../../userLogIn/service/auth.service';
 
 @Component({
     selector: 'am-products',
@@ -18,7 +20,9 @@ export class ProductListComponent implements OnInit {
     products: IProduct[] = [];
 
     constructor( private _productService: ProductService,
-                 private route: ActivatedRoute ) {
+                 private route: ActivatedRoute,
+                 private messageService: MessageService,
+                 private authService: AuthService ) {
 
         this.filterText = '';
     }
@@ -35,6 +39,9 @@ export class ProductListComponent implements OnInit {
 
     toggleImage(): void {
         this.showImage = !this.showImage;
+        if (this.showImage) {
+            this.messageService.addMessage(`${this.authService.currentUser.userName} viewed product image`);
+        }
     }
 
     onRatingClicked($event: string): void {
