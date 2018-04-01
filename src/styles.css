@@ -32,7 +32,7 @@ li {
   }
 }*/
 
-/* Slide transition I didnt try any of these 2 animation/transition */
+/* Slide transition*/
 am-root div.panel.panel-primary {
     animation-duration: .5s;
     animation-name: slideIn;
