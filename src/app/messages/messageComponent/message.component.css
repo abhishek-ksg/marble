@@ -1,0 +1,14 @@
+.popup-panel {
+    min-height: 575px;
+    max-height: 575px;
+}
+
+.message-row {
+    margin-bottom: 12px;
+}
+
+.popup-panel-body {
+    min-height: 500px;
+    max-height: 500px;
+    overflow-y: scroll;
+}

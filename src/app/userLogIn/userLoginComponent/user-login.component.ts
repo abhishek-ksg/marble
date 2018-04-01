@@ -58,6 +58,10 @@ export class UserLoginComponent implements OnInit, AfterViewInit {
                 this.router.navigateByUrl(this.authService.redirectUrl);
             } else {
                 this.router.navigate(['/products']);
+                // this.router.navigate([{outlets: {
+                //     primary: ['/products'],
+                //     popup: ['messages']
+                // }}]);
             }
         } else {
             this.errorMessage = 'Invalid User Name and Password';

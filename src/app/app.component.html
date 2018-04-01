@@ -2,29 +2,46 @@
 <div class="spin-centered">
     <mat-spinner [diameter]="40" *ngIf='routeLoading'></mat-spinner>
 </div>
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">{{webAppName}}</a>
-    </div>
-    <ul class="nav navbar-nav">
+<div>
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">{{webAppName}}</a>
+      </div>
+      <ul class="nav navbar-nav">
 
-      <li routerLinkActive="active"><a [routerLink]="['/welcome']">Welcome</a></li>
-      <li routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"><a [routerLink]="['/products']">Products</a></li>
-      <li routerLinkActive="active"><a [routerLink]="['/employeeForm']">Employee Form</a></li>
-      <li routerLinkActive="active"><a [routerLink]="['/products', '0', 'edit']">Add Product</a></li>
-      <li routerLinkActive="active"><a [routerLink]="['/products/search']">Search Product</a></li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right"
-        *ngIf="!authService.isLoggedIn()">
-      <li routerLinkActive="active"><a [routerLink]="['/customer']"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-      <li routerLinkActive="active"><a [routerLink]="['/login']"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right"
-        *ngIf="authService.isLoggedIn()">
-      <li routerLinkActive="active"><a [routerLink]="['/userProfile']"><span class="glyphicon glyphicon-user"></span> Welcome {{authService.currentUser.userName}}</a></li>
-      <li routerLinkActive="active"><a (click)="logOutUser()"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
-    </ul>
+        <li routerLinkActive="active"><a [routerLink]="['/welcome']">Welcome</a></li>
+        <li routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"><a [routerLink]="['/products']">Products</a></li>
+        <li routerLinkActive="active"><a [routerLink]="['/employeeForm']">Employee Form</a></li>
+        <li routerLinkActive="active"><a [routerLink]="['/products', '0', 'edit']">Add Product</a></li>
+        <li routerLinkActive="active"><a [routerLink]="['/products/search']">Search Product</a></li>
+        <li *ngIf="!messageService.messagePopupVisible"><a (click)="showMessages()">Show Msg</a></li>
+        <li *ngIf="messageService.messagePopupVisible"><a (click)="hideMessages()">Hide Msg</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right"
+          *ngIf="!authService.isLoggedIn()">
+        <li routerLinkActive="active"><a [routerLink]="['/customer']"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+        <li routerLinkActive="active"><a [routerLink]="['/login']"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right"
+          *ngIf="authService.isLoggedIn()">
+        <li routerLinkActive="active"><a [routerLink]="['/userProfile']"><span class="glyphicon glyphicon-user"></span> Welcome {{authService.currentUser.userName}}</a></li>
+        <li routerLinkActive="active"><a (click)="logOutUser()"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
+      </ul>
+    </div>
+
+  </nav>
+  <div class="container-fluid">
+    <div class="row">
+      <div [ngClass]="{'col-md-10 primary-router-with-message':
+        messageService.messagePopupVisible}">
+            <router-outlet></router-outlet>
+      </div>
+      <div [ngClass]="{'col-md-2 popup-router-with-message':
+        messageService.messagePopupVisible}">
+          <router-outlet name="popup"></router-outlet>
+      </div>
+    </div>
   </div>
-  <router-outlet></router-outlet>
-</nav>
+
+</div>
