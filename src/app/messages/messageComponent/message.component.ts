@@ -12,6 +12,7 @@ export class MessageComponent {
     constructor(private router: Router, public messageService: MessageService) { }
 
     close(): void {
+        this.messageService.messagePopupVisible = false;
         // Clearing the seconday route
         this.router.navigate([{outlets: {popup: null}}]);
     }
