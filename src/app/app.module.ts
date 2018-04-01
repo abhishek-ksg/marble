@@ -7,7 +7,6 @@ import { RouterModule } from '@angular/router';
 import { AngularMaterialModule } from './angularmaterial/angularmaterial.module';
 import { AppRouteModule } from './app-route.module';
 import { AppComponent } from './app.component';
-import { ProdusctsModule } from './products/products.module';
 import { EmployeeFormModule } from './employeeForm/employee-form.module';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { CustomerModule } from './customerSignUp/customer.module';
@@ -23,7 +22,6 @@ import { MessageModule } from './messages/messages.module';
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    ProdusctsModule,
     EmployeeFormModule,
     CustomerModule,
     AngularMaterialModule,

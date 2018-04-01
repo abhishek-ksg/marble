@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { SharedModule } from '../shared/shared.module';
 import { CustomerComponent } from './customerComponent/customer.component';
-import { AuthGruard } from './../userLogIn/service/auth-guard.service';
+import { AuthGuard } from './../userLogIn/service/auth-guard.service';
 
 const ROUTES: Array<object> = [
     {

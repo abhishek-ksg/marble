@@ -11,7 +11,7 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
 import { ProductDetailGuardService } from './services/product-detail-guard.service';
 import { ProductData } from './services/product.db';
 import { ProductEditDeactivateService } from './services/product-edit-deactivate.service';
-import { AuthGruard } from './../userLogIn/service/auth-guard.service';
+import { AuthGuard } from './../userLogIn/service/auth-guard.service';
 import { SearchProductValidationService } from './services/search-product-validation.service';
 import { SearchProductComponent } from './search-product-form/search-product.component';
 import { ProductDataResolver } from './services/product-data-resolver.service';
@@ -22,19 +22,25 @@ import { ProductEditParentComponent } from './product-edit/product-edit-parent/p
 
 const ROUTES: Array<object> = [
     {
-        path: 'products',
-        canActivate: [AuthGruard],
+        path: '',
+        canActivate: [AuthGuard],
         component: ProductListComponent,
         resolve: {products: AllProductsDataResolver}
     },
     {
-        path: 'products/search',
-        canActivate: [AuthGruard],
+        path: 'search',
+        canActivate: [AuthGuard],
         component: SearchProductComponent
     },
     {
-        path: 'products/:id/edit',
-        canActivate: [AuthGruard, ProductDetailGuardService],
+        path: ':id',
+        canActivate: [AuthGuard, ProductDetailGuardService],
+        component: ProductDetailComponent,
+        resolve: {product: ProductDataResolver}
+    },
+    {
+        path: ':id/edit',
+        canActivate: [AuthGuard, ProductDetailGuardService],
         canDeactivate: [ProductEditDeactivateService],
         component: ProductEditParentComponent,
         resolve: {product: ProductDataResolver},
@@ -43,12 +49,6 @@ const ROUTES: Array<object> = [
             {path: 'info', component: ProductEditInfoComponent},
             {path: 'tags', component: ProductEditTagsComponent}
         ]
-    },
-    {
-        path: 'products/:id',
-        canActivate: [AuthGruard, ProductDetailGuardService],
-        component: ProductDetailComponent,
-        resolve: {product: ProductDataResolver}
     }
 ];
 
@@ -78,6 +78,6 @@ const ROUTES: Array<object> = [
     ]
 
 })
-export class ProdusctsModule {
+export class ProductsModule {
 
 }
